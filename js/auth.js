@@ -85,7 +85,7 @@ function loginComGoogle() {
         });
       }
 
-      window.location.href = "pages/perfil.html";
+      window.location.href = "/zeze-dos-dimas/pages/perfil.html";
     })
     .catch(err => {
       console.error(err);
@@ -97,15 +97,15 @@ function loginComGoogle() {
 // NAVEGAÇÃO
 // ===============================
 function irParaPerfil() {
-  window.location.href = "pages/perfil.html";
+  window.location.href = "/zeze-dos-dimas/pages/perfil.html";
 }
 
 function irParaAdmin() {
-  window.location.href = "pages/admin.html";
+  window.location.href = "/zeze-dos-dimas/pages/admin.html";
 }
 
 function logout() {
   auth.signOut().then(() => {
-    window.location.href = "index.html";
+    window.location.href = "/zeze-dos-dimas/index.html";
   });
 }
