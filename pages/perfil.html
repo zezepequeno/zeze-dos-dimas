@@ -10,30 +10,47 @@
 </head>
 <body>
 
+  <!-- HEADER -->
   <header class="header animate">
     <h1>MEU PERFIL</h1>
     <p>Conta Google vinculada</p>
   </header>
 
+  <!-- CARD PERFIL -->
   <section class="profile-card animate">
-    <img id="userPhoto" alt="Foto do usuário">
+
+    <!-- FOTO -->
+    <img
+      id="userPhoto"
+      src=""
+      alt="Foto do usuário"
+      style="width:120px;height:120px;border-radius:50%;border:3px solid #00bfff;object-fit:cover;"
+    >
+
+    <!-- DADOS -->
     <h2 id="userName">Carregando...</h2>
     <p id="userEmail"></p>
 
-    <button onclick="window.location.href='../index.html'">
-      Voltar ao site
-    </button>
+    <!-- BOTÕES -->
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:12px;">
+      
+      <button onclick="window.location.href='../index.html'">
+        Voltar ao site
+      </button>
 
-    <button onclick="logout()">
-      Sair da Conta
-    </button>
+      <button onclick="logout()">
+        Sair da Conta
+      </button>
+
+    </div>
   </section>
 
-  <!-- Firebase -->
+  <!-- FIREBASE -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
+  <!-- SEUS SCRIPTS -->
   <script src="../js/firebase.js"></script>
   <script src="../js/auth.js"></script>
   <script src="../js/profile.js"></script>
