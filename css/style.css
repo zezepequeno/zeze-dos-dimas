@@ -17,9 +17,7 @@ body {
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
-
-  /* 🔥 AJUSTE: compatível com user-top fixo */
-  padding-top: 80px;
+  padding-top: 80px; /* alinhado com user-top */
 }
 
 /* ===== ANIMAÇÃO ===== */
@@ -115,139 +113,6 @@ body {
   box-shadow: 0 0 15px #00bfff;
 }
 
-/* ===== CARDS ===== */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-  padding: 40px 20px;
-}
-
-.card {
-  background: rgba(0,0,0,0.7);
-  border-radius: 20px;
-  padding: 25px;
-  border: 1px solid rgba(0,191,255,0.25);
-  box-shadow: 0 0 20px rgba(0,191,255,0.15);
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 30px rgba(0,191,255,0.35);
-}
-
-.card h3 {
-  margin-bottom: 10px;
-  color: #00bfff;
-}
-
-/* ===== TOPO USUÁRIO (LOGIN / ADMIN / VIP) ===== */
-.user-top {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  display: none;
-  align-items: center;
-  gap: 10px;
-  background: rgba(0,0,0,0.85);
-  padding: 8px 12px;
-  border-radius: 30px;
-  border: 1px solid #00bfff;
-  z-index: 9999;
-  max-width: calc(100% - 30px);
-}
-
-.user-top img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 2px solid #00bfff;
-}
-
-.user-top span {
-  color: #00bfff;
-  font-size: 13px;
-  font-weight: bold;
-  max-width: 140px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-/* ===== BADGES ===== */
-.badge {
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: bold;
-}
-
-.badge.admin {
-  background: red;
-  color: #fff;
-}
-
-.badge.vip {
-  background: gold;
-  color: #000;
-}
-
-/* ===== BOTÕES TOPO ===== */
-.user-top button {
-  background: #ff3b3b;
-  border: none;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 14px;
-  cursor: pointer;
-  font-size: 12px;
-}
-
-#btnAdmin {
-  background: gold;
-  color: #000;
-}
-
-/* ===== PERFIL ===== */
-.profile-card {
-  max-width: 360px;
-  margin: 40px auto;
-  background: #000;
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 0 25px rgba(0,191,255,0.25);
-  text-align: center;
-}
-
-.profile-card img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 3px solid #00bfff;
-  margin-bottom: 15px;
-}
-
-.profile-card h2 {
-  margin-bottom: 5px;
-}
-
-.profile-card p {
-  font-size: 14px;
-  opacity: 0.8;
-}
-
-.profile-card button {
-  margin-top: 20px;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 15px;
-  background: #00bfff;
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
-}
-
 /* ===== FOOTER ===== */
 .footer {
   text-align: center;
@@ -256,9 +121,8 @@ body {
   font-size: 13px;
 }
 
-/* ===== AJUSTES MOBILE ===== */
+/* ===== MOBILE ===== */
 @media (max-width: 480px) {
-
   body {
     padding-top: 90px;
   }
@@ -273,27 +137,5 @@ body {
 
   .menu {
     gap: 10px;
-  }
-
-  .user-top {
-    top: 10px;
-    right: 10px;
-    padding: 6px 10px;
-    gap: 6px;
-  }
-
-  .user-top img {
-    width: 30px;
-    height: 30px;
-  }
-
-  .user-top span {
-    font-size: 12px;
-    max-width: 90px;
-  }
-
-  .user-top button {
-    padding: 5px 8px;
-    font-size: 11px;
   }
 }
