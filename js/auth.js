@@ -13,6 +13,7 @@ auth.onAuthStateChanged(async user => {
     btnLogin && (btnLogin.style.display = "inline-block");
     btnPerfil && (btnPerfil.style.display = "none");
     userTop && (userTop.style.display = "none");
+    btnAdmin && (btnAdmin.style.display = "none");
     return;
   }
 
@@ -26,9 +27,23 @@ auth.onAuthStateChanged(async user => {
   if (dados.banido) {
     alert("Sua conta foi banida.");
     await auth.signOut();
-    window.location.href = "/zeze/index.html";
+    window.location.href = "/zeze-dos-dimas/index.html";
     return;
   }
 
-  btnLogin.style.display = "none";
-  btnPerfil.style.display =
+  btnLogin && (btnLogin.style.display = "none");
+  btnPerfil && (btnPerfil.style.display = "inline-block");
+  userTop && (userTop.style.display = "flex");
+
+  if (userFoto) userFoto.src = user.photoURL || "";
+  if (userNome) userNome.textContent = user.displayName || "Usuário";
+
+  if (userBadge) {
+    userBadge.textContent = dados.vip ? "VIP 🔥" : "FREE";
+  }
+
+  // 🔑 BOTÃO ADMIN
+  if (btnAdmin) {
+    btnAdmin.style.display = user.email === ADMIN_EMAIL ? "inline-block" : "none";
+  }
+});
