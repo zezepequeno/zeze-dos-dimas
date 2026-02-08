@@ -1,7 +1,11 @@
-// Observa autenticação (CONTROLA OS BOTÕES)
+// Observa autenticação (CONTROLA BOTÕES + TOPO)
 auth.onAuthStateChanged(user => {
   const btnLogin = document.getElementById("btnLogin");
   const btnPerfil = document.getElementById("btnPerfil");
+
+  const userTop = document.getElementById("userTop");
+  const userFoto = document.getElementById("userFoto");
+  const userNome = document.getElementById("userNome");
 
   if (user) {
     console.log("Usuário logado:", user.displayName);
@@ -9,11 +13,17 @@ auth.onAuthStateChanged(user => {
     if (btnLogin) btnLogin.style.display = "none";
     if (btnPerfil) btnPerfil.style.display = "inline-block";
 
+    if (userTop) userTop.style.display = "flex";
+    if (userFoto) userFoto.src = user.photoURL || "";
+    if (userNome) userNome.textContent = user.displayName || "";
+
   } else {
     console.log("Usuário não logado");
 
     if (btnLogin) btnLogin.style.display = "inline-block";
     if (btnPerfil) btnPerfil.style.display = "none";
+
+    if (userTop) userTop.style.display = "none";
   }
 });
 
@@ -24,20 +34,67 @@ function loginComGoogle() {
       const user = result.user;
       const uid = user.uid;
 
-      console.log("Login realizado:", user.displayName);
-
-      // 🔥 Salva usuário no Firestore se não existir
       const userRef = db.collection("usuarios").doc(uid);
 
       userRef.get().then(doc => {
         if (!doc.exists) {
           userRef.set({
+
+            // =========================
+            // IDENTIFICAÇÃO GLOBAL
+            // =========================
             uid: uid,
+            provider: "google",
+
+            // =========================
+            // DADOS PRINCIPAIS (COMPLETO)
+            // =========================
+            dadosPrincipais: {
+              uid: uid,
+              nome: user.displayName || "",
+              email: user.email || "",
+              foto: user.photoURL || "",
+              telefone: user.phoneNumber || "",
+              provider: "google",
+              emailVerificado: user.emailVerified,
+              criadoEmAuth: user.metadata.creationTime,
+              ultimoLoginAuth: user.metadata.lastSignInTime
+            },
+
+            // =========================
+            // DADOS RÁPIDOS (ATALHO)
+            // =========================
             nome: user.displayName || "",
             email: user.email || "",
             foto: user.photoURL || "",
-            provider: "google",
-            criadoEm: firebase.firestore.FieldValue.serverTimestamp()
+
+            // =========================
+            // STATUS DA CONTA
+            // =========================
+            vip: false,
+            nivel: "free",
+            banido: false,
+
+            // =========================
+            // CONTROLE E ESTATÍSTICAS
+            // =========================
+            acessos: 1,
+            compras: 0,
+            moedas: 0,
+
+            // =========================
+            // TIMESTAMPS
+            // =========================
+            criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
+            ultimoAcesso: firebase.firestore.FieldValue.serverTimestamp()
+          });
+
+        } else {
+          // Atualiza acesso se já existir
+          userRef.update({
+            ultimoAcesso: firebase.firestore.FieldValue.serverTimestamp(),
+            acessos: firebase.firestore.FieldValue.increment(1),
+            "dadosPrincipais.ultimoLoginAuth": user.metadata.lastSignInTime
           });
         }
       });
