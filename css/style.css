@@ -230,7 +230,7 @@ select:focus {
   transform: scale(1.05);
 }
 
-/* ===== RESULTADO ===== */
+/* ===== RESULTADO SENSIBILIDADE ===== */
 #resultado {
   background: linear-gradient(
     145deg,
