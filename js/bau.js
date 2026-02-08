@@ -1,15 +1,25 @@
+// bau.js
+// ===============================
+// Sistema de Abertura de Baú
+// ===============================
+
 function abrirBau() {
   const premios = [
-    "🎁 Cupom 15%",
+    "🎁 Cupom de 15%",
     "💎 100 Diamantes",
     "🎫 Passe Elite",
     "🔥 Skin Aleatória",
     "❌ Baú vazio"
   ];
 
-  const sorteio = Math.floor(Math.random() * premios.length);
-  const resultado = premios[sorteio];
+  const indiceSorteado = Math.floor(Math.random() * premios.length);
+  const premio = premios[indiceSorteado];
 
   const resultadoEl = document.getElementById("resultadoBau");
-  resultadoEl.innerText = "🎉 Você ganhou: " + resultado;
+  if (!resultadoEl) return;
+
+  resultadoEl.innerHTML = `
+    <strong>🎉 Resultado do Baú</strong><br>
+    ${premio}
+  `;
 }
