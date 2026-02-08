@@ -1,25 +1,59 @@
-// bau.js
 // ===============================
-// Sistema de Abertura de Baú
+// Sistema de Abertura de Baú 🎁
+// ZEZE DOS DIMAS
 // ===============================
+
+let abrindo = false;
 
 function abrirBau() {
+  if (abrindo) return;
+  abrindo = true;
+
   const premios = [
-    "🎁 Cupom de 15%",
-    "💎 100 Diamantes",
-    "🎫 Passe Elite",
-    "🔥 Skin Aleatória",
-    "❌ Baú vazio"
+    { texto: "🎁 Cupom de 15%", tipo: "comum" },
+    { texto: "💎 100 Diamantes", tipo: "raro" },
+    { texto: "🎫 Passe Elite", tipo: "epico" },
+    { texto: "🔥 Skin Aleatória", tipo: "epico" },
+    { texto: "❌ Baú vazio", tipo: "fail" }
   ];
 
-  const indiceSorteado = Math.floor(Math.random() * premios.length);
-  const premio = premios[indiceSorteado];
-
   const resultadoEl = document.getElementById("resultadoBau");
-  if (!resultadoEl) return;
+  const botao = document.getElementById("btnBau");
 
-  resultadoEl.innerHTML = `
-    <strong>🎉 Resultado do Baú</strong><br>
-    ${premio}
-  `;
+  if (!resultadoEl) {
+    abrindo = false;
+    return;
+  }
+
+  // 🎁 Feedback visual
+  if (botao) {
+    botao.disabled = true;
+    botao.innerText = "ABRINDO... 🎁";
+    botao.style.opacity = "0.6";
+  }
+
+  resultadoEl.classList.remove("show", "comum", "raro", "epico", "fail");
+  resultadoEl.innerHTML = "🔓 Abrindo o baú...";
+
+  setTimeout(() => {
+    const indiceSorteado = Math.floor(Math.random() * premios.length);
+    const premio = premios[indiceSorteado];
+
+    resultadoEl.innerHTML = `
+      <div class="resultado-box ${premio.tipo}">
+        <strong>🎉 Resultado do Baú</strong><br><br>
+        ${premio.texto}
+      </div>
+    `;
+
+    resultadoEl.classList.add("show", premio.tipo);
+
+    if (botao) {
+      botao.disabled = false;
+      botao.innerText = "ABRIR NOVAMENTE 🎁";
+      botao.style.opacity = "1";
+    }
+
+    abrindo = false;
+  }, 1800);
 }
