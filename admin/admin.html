@@ -1,82 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Painel Admin | ZEZE DOS DIMAS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="/zeze-dos-dimas/css/style.css">
-
-  <style>
-    .admin-container {
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .admin-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .admin-header p {
-      opacity: 0.8;
-      margin-top: 5px;
-    }
-
-    .user-card {
-      background: rgba(0,0,0,0.8);
-      border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 15px;
-      border: 1px solid rgba(0,191,255,0.3);
-      box-shadow: 0 0 15px rgba(0,191,255,0.15);
-    }
-
-    .user-card b {
-      color: #00bfff;
-      font-size: 16px;
-    }
-
-    .actions {
-      margin-top: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .actions button {
-      padding: 8px 14px;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-    }
-
-    .ban { background: #ff3b3b; color: #fff; }
-    .vip { background: gold; color: #000; }
-    .coin { background: #00ff99; color: #000; }
-  </style>
-</head>
-
-<body>
-
-<div class="admin-container animate">
-
-  <div class="admin-header">
-    <h1>🛠️ PAINEL ADMIN — NÍVEL X</h1>
-    <p id="adminEmail"></p>
-  </div>
-
-  <div id="usersList"></div>
-
-</div>
-
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
-<script src="/zeze-dos-dimas/js/firebase.js"></script>
-
 <script>
 const ADMIN_EMAIL = "virtualinvest@gmail.com";
 
@@ -87,7 +8,9 @@ auth.onAuthStateChanged(async user => {
     return;
   }
 
-  document.getElementById("adminEmail").innerText = "Admin logado: " + user.email;
+  document.getElementById("adminEmail").innerText =
+    "Admin logado: " + user.email;
+
   carregarUsuarios();
 });
 
@@ -143,7 +66,7 @@ async function moedas(uid, valor) {
   await db.collection("usuarios").doc(uid).update({
     moedas: firebase.firestore.FieldValue.increment(valor)
   });
-  registrarLog(uid, valor > 0 ? `+${valor} MOEDAS` : `${valor} MOEDAS`);
+  registrarLog(uid, `${valor > 0 ? "+" : ""}${valor} MOEDAS`);
   carregarUsuarios();
 }
 
@@ -155,6 +78,3 @@ function registrarLog(uid, acao) {
   });
 }
 </script>
-
-</body>
-</html>
