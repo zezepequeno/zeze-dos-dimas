@@ -30,7 +30,19 @@
     <!-- ROLETA -->
     <div class="card animate">
       <h3>🎡 Roleta Premiada</h3>
-      <p>Clique para girar a roleta</p>
+
+      <div class="roleta-container">
+        <div id="roleta" class="roleta">
+          <span>10% OFF</span>
+          <span>20% OFF</span>
+          <span>Passe Elite</span>
+          <span>Produto FF</span>
+          <span>Giro Grátis</span>
+          <span>Nada 😅</span>
+        </div>
+        <div class="seta"></div>
+      </div>
+
       <button onclick="girarRoleta()">GIRAR ROLETA</button>
       <p id="resultadoRoleta"></p>
     </div>
@@ -38,8 +50,7 @@
     <!-- BAÚ -->
     <div class="card animate">
       <h3>🎁 Abrir Baú</h3>
-      <p>Abra um baú e ganhe um prêmio</p>
-      <button onclick="abrirBau()">ABRIR BAÚ</button>
+      <div class="bau" onclick="abrirBau()">📦</div>
       <p id="resultadoBau"></p>
     </div>
 
