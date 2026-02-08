@@ -10,54 +10,49 @@
 </head>
 <body>
 
-  <header class="header animate">
-    <h1>CASSINO FREE FIRE 🎰</h1>
-    <p>Roleta • Baús • Prêmios</p>
-  </header>
+<header class="header animate">
+  <h1>🎰 CASSINO FREE FIRE</h1>
+  <p>Roleta • Baús • Prêmios</p>
+</header>
 
-  <nav class="menu animate">
-    <a href="../index.html">Home</a>
-    <a href="sensibilidade.html">Sensibilidade</a>
-  </nav>
+<nav class="menu animate">
+  <a href="../index.html">Home</a>
+  <a href="sensibilidade.html">Sensibilidade</a>
+</nav>
 
-  <section class="hero animate">
-    <h2>Gire e Ganhe 🔥</h2>
-    <p>Roleta e baús com produtos e cupons</p>
-  </section>
+<section class="cards">
 
-  <section class="cards">
+  <!-- ROLETA -->
+  <div class="card animate">
+    <h3>🎡 Roleta Premiada</h3>
+    <p>Tente a sorte e ganhe prêmios</p>
 
-    <!-- ROLETA -->
-    <div class="card animate">
-      <h3>🎡 Roleta Premiada</h3>
-      <p>Clique para girar a roleta</p>
-      <button onclick="girarRoleta()">GIRAR ROLETA</button>
-      <p id="resultadoRoleta"></p>
-    </div>
+    <button onclick="girarRoleta()">GIRAR ROLETA</button>
+    <p id="resultadoRoleta" style="margin-top:15px;"></p>
+  </div>
 
-    <!-- BAÚ -->
-    <div class="card animate">
-      <h3>🎁 Abrir Baú</h3>
-      <p>Abra um baú e ganhe um prêmio</p>
-      <button onclick="abrirBau()">ABRIR BAÚ</button>
-      <p id="resultadoBau"></p>
-    </div>
+  <!-- BAÚ -->
+  <div class="card animate">
+    <h3>🎁 Baú Misterioso</h3>
+    <p>Abra e receba um prêmio surpresa</p>
 
-  </section>
+    <button onclick="abrirBau()">ABRIR BAÚ</button>
+    <p id="resultadoBau" style="margin-top:15px;"></p>
+  </div>
 
-  <section class="alert animate">
-    <p>⚠️ Giros e prêmios demonstrativos.</p>
-    <p>Entrega manual nesta versão.</p>
-  </section>
+</section>
 
-  <footer class="footer animate">
-    <p>© 2026 - ZEZE DOS DIMAS</p>
-  </footer>
+<section class="alert animate">
+  <p>⚠️ Prêmios demonstrativos.</p>
+  <p>Entrega manual nesta versão.</p>
+</section>
 
-  <!-- JS CORRETOS -->
-  <script src="../js/roleta.js"></script>
-  <script src="../js/bau.js"></script>
-  <script src="../js/main.js"></script>
+<footer class="footer">
+  <p>© 2026 - ZEZE DOS DIMAS</p>
+</footer>
+
+<script src="../js/roleta.js"></script>
+<script src="../js/bau.js"></script>
 
 </body>
 </html>
