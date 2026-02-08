@@ -31,21 +31,22 @@ function girarRoleta() {
   botao.innerText = "GIRANDO... 🎰";
   botao.style.opacity = "0.6";
 
-  resultadoEl.classList.remove("show");
+  // 🎯 Reset visual
+  resultadoEl.classList.remove("show", "comum", "raro", "epico", "fail");
   resultadoEl.innerHTML = "🎰 Girando a roleta...";
 
-  // ⏳ Simula giro real
+  // ⏳ Simula giro real (UX de cassino)
   setTimeout(() => {
     const sorteio = Math.floor(Math.random() * premios.length);
     const premio = premios[sorteio];
 
     resultadoEl.innerHTML = `
-      <div class="resultado ${premio.tipo}">
+      <div class="resultado-box ${premio.tipo}">
         🎉 <strong>${premio.texto}</strong>
       </div>
     `;
 
-    resultadoEl.classList.add("show");
+    resultadoEl.classList.add("show", premio.tipo);
 
     // 🔓 Libera botão
     botao.disabled = false;
@@ -53,5 +54,5 @@ function girarRoleta() {
     botao.style.opacity = "1";
     girando = false;
 
-  }, 2000); // tempo do giro
+  }, 2000);
 }
