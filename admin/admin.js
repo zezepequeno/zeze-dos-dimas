@@ -1,66 +1,77 @@
 const ADMIN_EMAIL = "virtualinvest@gmail.com";
 
+// ===============================
+// PROTEÇÃO DO PAINEL ADMIN
+// ===============================
 auth.onAuthStateChanged(async user => {
-  if (!user || user.email !== ADMIN_EMAIL) {
+
+  if (!user) {
     window.location.href = "/zeze-dos-dimas/index.html";
     return;
   }
 
+  if (user.email !== ADMIN_EMAIL) {
+    alert("Acesso negado");
+    window.location.href = "/zeze-dos-dimas/index.html";
+    return;
+  }
+
+  // Mostra email do admin
   document.getElementById("adminEmail").textContent =
-    `Logado como admin: ${user.email}`;
+    "Logado como: " + user.email;
 
   carregarUsuarios();
 });
 
-async function carregarUsuarios() {
+// ===============================
+// CARREGAR USUÁRIOS
+// ===============================
+function carregarUsuarios() {
   const usersList = document.getElementById("usersList");
-  usersList.innerHTML = "Carregando usuários...";
-
-  const snapshot = await db.collection("usuarios").get();
   usersList.innerHTML = "";
 
-  snapshot.forEach(doc => {
-    const u = doc.data();
+  db.collection("usuarios").orderBy("criadoEm", "desc").get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        const u = doc.data();
 
-    const div = document.createElement("div");
-    div.className = "user-card";
+        const div = document.createElement("div");
+        div.className = "user-card";
 
-    div.innerHTML = `
-      <img src="${u.foto || ""}">
-      <h3>${u.nome || "Usuário"}</h3>
-      <p>${u.email || ""}</p>
-      <p>Status: ${u.banido ? "🚫 Banido" : "✅ Ativo"}</p>
-      <p>Nível: ${u.nivel || "free"}</p>
+        div.innerHTML = `
+          <strong>${u.nome || "Sem nome"}</strong><br>
+          <small>${u.email}</small><br>
+          <span>Status: ${u.banido ? "🚫 Banido" : "✅ Ativo"}</span><br>
+          <span>VIP: ${u.vip ? "⭐ Sim" : "Não"}</span><br><br>
 
-      <div class="user-actions">
-        <button class="btn-vip" onclick="darVIP('${doc.id}')">VIP</button>
-        ${
-          u.banido
-            ? `<button class="btn-unban" onclick="desbanir('${doc.id}')">Desbanir</button>`
-            : `<button class="btn-ban" onclick="banir('${doc.id}')">Banir</button>`
-        }
-      </div>
-    `;
+          <button onclick="banirUsuario('${doc.id}', ${u.banido})">
+            ${u.banido ? "Desbanir" : "Banir"}
+          </button>
 
-    usersList.appendChild(div);
-  });
+          <button onclick="vipUsuario('${doc.id}', ${u.vip})">
+            ${u.vip ? "Remover VIP" : "Tornar VIP"}
+          </button>
+        `;
+
+        usersList.appendChild(div);
+      });
+    });
 }
 
-function darVIP(uid) {
+// ===============================
+// BAN / DESBAN
+// ===============================
+function banirUsuario(uid, statusAtual) {
   db.collection("usuarios").doc(uid).update({
-    vip: true,
-    nivel: "vip"
+    banido: !statusAtual
   }).then(carregarUsuarios);
 }
 
-function banir(uid) {
+// ===============================
+// VIP / REMOVER VIP
+// ===============================
+function vipUsuario(uid, statusAtual) {
   db.collection("usuarios").doc(uid).update({
-    banido: true
-  }).then(carregarUsuarios);
-}
-
-function desbanir(uid) {
-  db.collection("usuarios").doc(uid).update({
-    banido: false
+    vip: !statusAtual
   }).then(carregarUsuarios);
 }
