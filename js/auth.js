@@ -7,23 +7,40 @@ auth.onAuthStateChanged(user => {
   }
 });
 
-// Login Google (REDIRECT - funciona em mobile)
+// Login Google (somente quando clicar)
 function loginComGoogle() {
-  auth.signInWithRedirect(provider);
-}
+  auth.signInWithPopup(provider)
+    .then(result => {
+      const user = result.user;
 
-// Trata retorno do redirect
-auth.getRedirectResult()
-  .then(result => {
-    if (result.user) {
-      console.log("Login realizado:", result.user.displayName);
+      console.log("Login realizado:", user.displayName);
+
+      const uid = user.uid;
+
+      // 🔥 Salva usuário no Firestore se não existir
+      const userRef = db.collection("usuarios").doc(uid);
+
+      userRef.get().then(doc => {
+        if (!doc.exists) {
+          userRef.set({
+            uid: uid,
+            nome: user.displayName || "",
+            email: user.email || "",
+            foto: user.photoURL || "",
+            provider: "google",
+            criadoEm: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        }
+      });
+
+      // Redireciona para o perfil
       window.location.href = "pages/perfil.html";
-    }
-  })
-  .catch(error => {
-    console.error("Erro no login:", error);
-    alert("Erro ao fazer login com Google.");
-  });
+    })
+    .catch(error => {
+      console.error("Erro no login:", error);
+      alert("Erro ao fazer login com Google.");
+    });
+}
 
 // Logout
 function logout() {
