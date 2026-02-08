@@ -2,6 +2,8 @@
 // Gerador de Sensibilidade Free Fire
 // ===============================
 
+let ultimaSensibilidade = null;
+
 function gerarSensibilidade() {
   const marcaEl = document.getElementById("marca");
   const desempenhoEl = document.getElementById("desempenho");
@@ -50,6 +52,8 @@ function gerarSensibilidade() {
     };
   }
 
+  ultimaSensibilidade = sensibilidade;
+
   const resultadoHTML = `
     <p>🎯 Geral: <strong>${sensibilidade.geral}</strong></p>
     <p>🔴 Ponto Vermelho: <strong>${sensibilidade.red}</strong></p>
@@ -61,9 +65,48 @@ function gerarSensibilidade() {
 
   const sensiEl = document.getElementById("sensibilidade");
   const resultadoBox = document.getElementById("resultado");
+  const status = document.getElementById("status");
 
   if (!sensiEl || !resultadoBox) return;
 
   sensiEl.innerHTML = resultadoHTML;
   resultadoBox.style.display = "block";
+  if (status) status.innerText = "";
+}
+
+// 📋 COPIAR
+function copiarSensibilidade() {
+  if (!ultimaSensibilidade) return;
+
+  const texto = `
+🎯 SENSIBILIDADE FREE FIRE
+Geral: ${ultimaSensibilidade.geral}
+Ponto Vermelho: ${ultimaSensibilidade.red}
+Mira 2x: ${ultimaSensibilidade.x2}
+Mira 4x: ${ultimaSensibilidade.x4}
+AWM: ${ultimaSensibilidade.awm}
+Olhadinha: ${ultimaSensibilidade.olhadinha}
+  `;
+
+  navigator.clipboard.writeText(texto);
+
+  const status = document.getElementById("status");
+  if (status) status.innerText = "✅ Sensibilidade copiada!";
+}
+
+// 💾 SALVAR (base para histórico / VIP)
+function salvarSensibilidade() {
+  if (!ultimaSensibilidade) return;
+
+  let historico = JSON.parse(localStorage.getItem("historicoSensibilidade")) || [];
+
+  historico.push({
+    ...ultimaSensibilidade,
+    data: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("historicoSensibilidade", JSON.stringify(historico));
+
+  const status = document.getElementById("status");
+  if (status) status.innerText = "💾 Sensibilidade salva!";
 }
