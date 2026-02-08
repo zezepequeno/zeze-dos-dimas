@@ -1,4 +1,4 @@
-/* ===== RESET BÁSICO ===== */
+/* ===== RESET ===== */
 * {
   margin: 0;
   padding: 0;
@@ -17,7 +17,63 @@ body {
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
-  padding-top: 80px; /* alinhado com user-top */
+  padding-top: 80px;
+}
+
+/* ===== TOPO USUÁRIO ===== */
+.user-top {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0,0,0,0.85);
+  padding: 8px 12px;
+  border-radius: 30px;
+  border: 1px solid #00bfff;
+  z-index: 9999;
+  max-width: calc(100% - 30px);
+}
+
+.user-top img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #00bfff;
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.badge.admin {
+  background: red;
+  color: #fff;
+}
+
+.badge.vip {
+  background: gold;
+  color: #000;
+}
+
+.user-top button {
+  background: #ff3b3b;
+  border: none;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#btnAdmin {
+  background: gold;
+  color: #000;
+  display: none;
 }
 
 /* ===== ANIMAÇÃO ===== */
