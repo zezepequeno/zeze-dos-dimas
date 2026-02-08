@@ -1,101 +1,51 @@
 const ADMIN_EMAIL = "virtualinvest@gmail.com";
 
-// ===============================
-// OBSERVA AUTENTICAÇÃO GLOBAL
-// ===============================
-auth.onAuthStateChanged(async user => {
+auth.onAuthStateChanged(user => {
   const btnLogin = document.getElementById("btnLogin");
   const btnPerfil = document.getElementById("btnPerfil");
-
   const userTop = document.getElementById("userTop");
   const userFoto = document.getElementById("userFoto");
   const userNome = document.getElementById("userNome");
 
-  const btnAdmin = document.getElementById("btnAdmin");
-
   if (user) {
-    if (btnLogin) btnLogin.style.display = "none";
-    if (btnPerfil) btnPerfil.style.display = "inline-block";
+    btnLogin && (btnLogin.style.display = "none");
+    btnPerfil && (btnPerfil.style.display = "inline-block");
 
-    if (userTop) userTop.style.display = "flex";
-    if (userFoto) userFoto.src = user.photoURL || "";
-    if (userNome) userNome.textContent = user.displayName || "Usuário";
-
-    if (btnAdmin && user.email === ADMIN_EMAIL) {
-      btnAdmin.style.display = "inline-block";
-    }
+    userTop && (userTop.style.display = "flex");
+    userFoto && (userFoto.src = user.photoURL || "");
+    userNome && (userNome.textContent = user.displayName || "Usuário");
 
   } else {
-    if (btnLogin) btnLogin.style.display = "inline-block";
-    if (btnPerfil) btnPerfil.style.display = "none";
-    if (userTop) userTop.style.display = "none";
-    if (btnAdmin) btnAdmin.style.display = "none";
+    btnLogin && (btnLogin.style.display = "inline-block");
+    btnPerfil && (btnPerfil.style.display = "none");
+    userTop && (userTop.style.display = "none");
   }
 });
 
-// ===============================
-// LOGIN GOOGLE + FIRESTORE AUTO
-// ===============================
 function loginComGoogle() {
-  auth.signInWithPopup(provider)
-    .then(async result => {
-      const user = result.user;
-      const uid = user.uid;
+  auth.signInWithPopup(provider).then(async res => {
+    const user = res.user;
+    const ref = db.collection("usuarios").doc(user.uid);
+    const snap = await ref.get();
 
-      const userRef = db.collection("usuarios").doc(uid);
-      const snap = await userRef.get();
+    if (!snap.exists) {
+      await ref.set({
+        uid: user.uid,
+        nome: user.displayName,
+        email: user.email,
+        foto: user.photoURL,
+        admin: user.email === ADMIN_EMAIL,
+        vip: false,
+        banido: false,
+        moedas: 0,
+        criadoEm: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    }
 
-      if (!snap.exists) {
-        await userRef.set({
-          uid,
-          provider: "google",
-
-          dadosPrincipais: {
-            uid,
-            nome: user.displayName || "",
-            email: user.email || "",
-            foto: user.photoURL || "",
-            telefone: user.phoneNumber || "",
-            emailVerificado: user.emailVerified,
-            criadoEmAuth: user.metadata.creationTime,
-            ultimoLoginAuth: user.metadata.lastSignInTime
-          },
-
-          nome: user.displayName || "",
-          email: user.email || "",
-          foto: user.photoURL || "",
-
-          vip: false,
-          nivel: "free",
-          banido: false,
-          admin: user.email === ADMIN_EMAIL,
-
-          acessos: 1,
-          compras: 0,
-          moedas: 0,
-
-          criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
-          ultimoAcesso: firebase.firestore.FieldValue.serverTimestamp()
-        });
-      } else {
-        await userRef.update({
-          ultimoAcesso: firebase.firestore.FieldValue.serverTimestamp(),
-          acessos: firebase.firestore.FieldValue.increment(1),
-          "dadosPrincipais.ultimoLoginAuth": user.metadata.lastSignInTime
-        });
-      }
-
-      window.location.href = "/zeze-dos-dimas/pages/perfil.html";
-    })
-    .catch(err => {
-      console.error(err);
-      alert("Erro ao fazer login");
-    });
+    window.location.href = "/zeze-dos-dimas/pages/perfil.html";
+  });
 }
 
-// ===============================
-// NAVEGAÇÃO
-// ===============================
 function irParaPerfil() {
   window.location.href = "/zeze-dos-dimas/pages/perfil.html";
 }
