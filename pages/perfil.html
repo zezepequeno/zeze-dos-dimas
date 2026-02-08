@@ -7,24 +7,29 @@
 </head>
 <body>
 
-  <div class="profile-card">
+  <div class="profile-card animate">
     <img id="perfilFoto" src="">
     <h2 id="perfilNome"></h2>
     <p id="perfilEmail"></p>
+
+    <!-- BOTÕES -->
+    <button onclick="voltarSite()">⬅ Voltar para o site</button>
     <button onclick="logout()">Sair</button>
   </div>
 
+  <!-- FIREBASE -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
+  <!-- SCRIPTS -->
   <script src="../js/firebase.js"></script>
   <script src="../js/auth.js"></script>
 
   <script>
     auth.onAuthStateChanged(user => {
       if (!user) {
-        window.location.href = "../index.html";
+        window.location.href = "/zeze/index.html";
         return;
       }
 
@@ -32,6 +37,10 @@
       document.getElementById("perfilNome").textContent = user.displayName || "";
       document.getElementById("perfilEmail").textContent = user.email || "";
     });
+
+    function voltarSite() {
+      window.location.href = "/zeze/index.html";
+    }
   </script>
 
 </body>
