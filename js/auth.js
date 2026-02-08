@@ -9,6 +9,7 @@ auth.onAuthStateChanged(async user => {
   const userBadge = document.getElementById("userBadge");
   const btnAdmin = document.getElementById("btnAdmin");
 
+  // 🔓 DESLOGADO
   if (!user) {
     btnLogin && (btnLogin.style.display = "inline-block");
     btnPerfil && (btnPerfil.style.display = "none");
@@ -17,19 +18,29 @@ auth.onAuthStateChanged(async user => {
     return;
   }
 
-  const ref = db.collection("usuarios").doc(user.uid);
-  const snap = await ref.get();
-  if (!snap.exists) return;
+  // 🔎 BUSCA DADOS DO USUÁRIO
+  let snap;
+  try {
+    const ref = db.collection("usuarios").doc(user.uid);
+    snap = await ref.get();
+  } catch (e) {
+    console.error("Erro ao buscar usuário:", e);
+    return;
+  }
+
+  if (!snap || !snap.exists) return;
 
   const dados = snap.data();
 
-  if (dados.banido) {
+  // 🚫 BANIMENTO
+  if (dados.banido === true) {
     alert("Sua conta foi banida.");
     await auth.signOut();
     window.location.href = "/zeze-dos-dimas/index.html";
     return;
   }
 
+  // ✅ LOGADO
   btnLogin && (btnLogin.style.display = "none");
   btnPerfil && (btnPerfil.style.display = "inline-block");
   userTop && (userTop.style.display = "flex");
@@ -37,10 +48,21 @@ auth.onAuthStateChanged(async user => {
   userFoto && (userFoto.src = user.photoURL || "");
   userNome && (userNome.textContent = user.displayName || "Usuário");
 
+  // 🏷️ BADGE
   if (userBadge) {
     userBadge.style.display = "inline-block";
     userBadge.textContent = dados.vip ? "VIP 🔥" : "FREE";
   }
 
-  btnAdmin && (btnAdmin.style.display = user.email === ADMIN_EMAIL ? "inline-block" : "none");
+  // 🧑‍⚖️ ADMIN — DUPLA VERIFICAÇÃO (EMAIL + CLAIM)
+  try {
+    const token = await user.getIdTokenResult();
+    const isAdmin =
+      user.email === ADMIN_EMAIL || token.claims.admin === true;
+
+    btnAdmin && (btnAdmin.style.display = isAdmin ? "inline-block" : "none");
+  } catch (e) {
+    console.warn("Erro ao verificar admin:", e);
+    btnAdmin && (btnAdmin.style.display = "none");
+  }
 });
