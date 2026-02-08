@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZEZE DOS DIMAS | Free Fire</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="/zeze/css/style.css">
+  <!-- CSS (RELATIVO - NÃO QUEBRA) -->
+  <link rel="stylesheet" href="css/style.css">
 
   <!-- FONTE -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
 
   <!-- TOPO USUÁRIO LOGADO -->
   <div id="userTop" class="user-top" style="display:none;">
-    <img id="userFoto" src="" alt="Foto do usuário">
+    <img id="userFoto" src="">
     <span id="userNome"></span>
     <span id="userBadge" class="badge" style="display:none;"></span>
 
@@ -35,9 +35,9 @@
 
   <!-- MENU -->
   <nav class="menu animate">
-    <a href="/zeze/index.html">Home</a>
-    <a href="/zeze/pages/cassino.html">Cassino FF</a>
-    <a href="/zeze/pages/sensibilidade.html">Sensibilidade</a>
+    <a href="index.html">Home</a>
+    <a href="pages/cassino.html">Cassino FF</a>
+    <a href="pages/sensibilidade.html">Sensibilidade</a>
   </nav>
 
   <!-- HERO -->
@@ -45,10 +45,7 @@
     <h2>SUBA CAPA NO FREE FIRE 🔥</h2>
     <p>Gerador de sensibilidade, loja gamer e cassino Free Fire</p>
 
-    <button id="btnLogin" onclick="loginComGoogle()">
-      ENTRAR COM GOOGLE
-    </button>
-
+    <button id="btnLogin" onclick="loginComGoogle()">ENTRAR COM GOOGLE</button>
     <button id="btnPerfil" onclick="irParaPerfil()" style="display:none;">
       MEU PERFIL
     </button>
@@ -88,11 +85,11 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-  <!-- SCRIPTS DO SITE -->
-  <script src="/zeze/js/firebase.js"></script>
-  <script src="/zeze/js/auth.js"></script>
-  <script src="/zeze/js/admin-check.js"></script>
-  <script src="/zeze/js/main.js"></script>
+  <!-- SCRIPTS -->
+  <script src="js/firebase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin-check.js"></script>
+  <script src="js/main.js"></script>
 
 </body>
 </html>
