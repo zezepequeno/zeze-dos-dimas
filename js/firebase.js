@@ -16,7 +16,7 @@ if (!firebase.apps.length) {
 
 // ===== SERVIÇOS =====
 const auth = firebase.auth();
-const db = firebase.firestore(); // 🔥 ISSO É O QUE FALTAVA
+const db = firebase.firestore(); // 🔥 Firestore
 const provider = new firebase.auth.GoogleAuthProvider();
 
 // Força seleção de conta Google
