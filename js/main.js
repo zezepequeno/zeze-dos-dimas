@@ -11,26 +11,38 @@ const observer = new IntersectionObserver(entries => {
 
 animatedElements.forEach(el => observer.observe(el));
 
-// ===== ROLETAS =====
+// ===== ROLETA =====
+let girando = false;
+
 function girarRoleta() {
+  if (girando) return;
+  girando = true;
+
   const premios = [
     "Cupom 10% OFF",
     "Cupom 20% OFF",
     "Passe de Elite Free Fire",
+    "Produto Free Fire",
     "Giro Grátis",
     "Nada 😅"
   ];
 
+  const roleta = document.getElementById("roleta");
   const resultado = document.getElementById("resultadoRoleta");
+
   resultado.innerHTML = "🎰 Girando...";
   resultado.classList.add("loading");
+
+  const angulo = Math.floor(Math.random() * 360) + 1440;
+  roleta.style.transform = `rotate(${angulo}deg)`;
 
   setTimeout(() => {
     const sorteio = Math.floor(Math.random() * premios.length);
     resultado.classList.remove("loading");
     resultado.innerHTML =
       "🎉 Você ganhou: <strong>" + premios[sorteio] + "</strong>";
-  }, 1500);
+    girando = false;
+  }, 3000);
 }
 
 // ===== BAÚ =====
