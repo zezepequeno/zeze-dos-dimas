@@ -25,16 +25,14 @@ function abrirBau() {
     return;
   }
 
-  // 🔒 Bloqueia spam
   if (botao) {
     botao.disabled = true;
     botao.innerText = "ABRINDO... 🎁";
     botao.style.opacity = "0.6";
   }
 
-  // 🔄 Reset visual
-  resultadoEl.className = "resultado-bau";
-  resultadoEl.innerHTML = "🔓 Abrindo o baú...";
+  resultadoEl.innerHTML = "🔓 Abrindo...";
+  resultadoEl.className = "resultado loading";
 
   setTimeout(() => {
     const indice = Math.floor(Math.random() * premios.length);
@@ -42,12 +40,12 @@ function abrirBau() {
 
     resultadoEl.innerHTML = `
       <div class="resultado-box ${premio.tipo}">
-        <strong>🎉 Resultado do Baú</strong>
+        <strong>🎉 Resultado</strong>
         <p>${premio.texto}</p>
       </div>
     `;
 
-    resultadoEl.classList.add("show");
+    resultadoEl.className = "resultado show";
 
     if (botao) {
       botao.disabled = false;
