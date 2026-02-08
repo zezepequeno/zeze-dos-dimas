@@ -7,11 +7,14 @@ auth.onAuthStateChanged(user => {
   }
 });
 
-// Função de login
+// Login Google
 function loginComGoogle() {
   auth.signInWithPopup(provider)
     .then(result => {
       console.log("Login realizado:", result.user.displayName);
+      if (window.location.pathname.includes("index.html")) {
+        window.location.href = "pages/perfil.html";
+      }
     })
     .catch(error => {
       console.error("Erro no login:", error);
@@ -19,9 +22,9 @@ function loginComGoogle() {
     });
 }
 
-// Logout (pronto pra usar depois)
+// Logout
 function logout() {
   auth.signOut().then(() => {
-    location.reload();
+    window.location.href = "../index.html";
   });
 }
