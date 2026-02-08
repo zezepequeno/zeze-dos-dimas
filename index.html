@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZEZE DOS DIMAS | Free Fire</title>
 
-  <!-- CSS CORRIGIDO -->
-  <link rel="stylesheet" href="/CSS/estilo.css?v=6">
+  <!-- CSS (CAMINHO CORRETO + SEM CONFLITO) -->
+  <link rel="stylesheet" href="/CSS/estilo.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -20,48 +20,57 @@
     body {
       background: #0b0b0b;
       color: #fff;
-      padding-top: 90px; /* corrigido */
+      padding-top: 80px; /* alinhado com o CSS */
     }
 
+    /* TOPO USUÁRIO — mantém, mas sem quebrar layout */
     .user-top {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 70px;
-      background: #111;
+      top: 15px;
+      right: 15px;
       display: none;
       align-items: center;
-      justify-content: flex-end;
       gap: 10px;
-      padding: 0 20px;
-      z-index: 999;
-      border-bottom: 1px solid #222;
+      background: rgba(0,0,0,0.85);
+      padding: 8px 12px;
+      border-radius: 30px;
+      border: 1px solid #00bfff;
+      z-index: 9999;
+      max-width: calc(100% - 30px);
     }
 
     .user-top img {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
+      border: 2px solid #00bfff;
     }
 
     .badge {
       padding: 4px 8px;
       border-radius: 6px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: bold;
     }
 
-    .badge.admin { background: red; }
-    .badge.vip { background: gold; color: #000; }
+    .badge.admin {
+      background: red;
+      color: #fff;
+    }
+
+    .badge.vip {
+      background: gold;
+      color: #000;
+    }
 
     .user-top button {
-      background: #ff0033;
+      background: #ff3b3b;
       border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
       color: #fff;
+      padding: 6px 12px;
+      border-radius: 14px;
       cursor: pointer;
+      font-size: 12px;
     }
 
     #btnAdmin {
@@ -90,8 +99,8 @@
 
 <nav class="menu animate">
   <a href="/index.html">Home</a>
-  <a href="/páginas/cassino.html">Cassino FF</a>
-  <a href="/páginas/sensibilidade.html">Sensibilidade</a>
+  <a href="/paginas/cassino.html">Cassino FF</a>
+  <a href="/paginas/sensibilidade.html">Sensibilidade</a>
 </nav>
 
 <section class="hero animate">
@@ -106,6 +115,7 @@
   <p>© 2026 - ZEZE DOS DIMAS</p>
 </footer>
 
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
