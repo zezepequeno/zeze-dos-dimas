@@ -9,17 +9,15 @@ const firebaseConfig = {
   measurementId: "G-YNDH2FH765"
 };
 
-// Inicializa Firebase (proteção contra inicializar duas vezes)
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
+// Inicializa Firebase
+firebase.initializeApp(firebaseConfig);
 
-// ===== SERVIÇOS =====
+// Serviços
 const auth = firebase.auth();
-const db = firebase.firestore(); // 🔥 Firestore
 const provider = new firebase.auth.GoogleAuthProvider();
+const db = firebase.firestore();
 
-// Força seleção de conta Google
+// Força seleção de conta
 provider.setCustomParameters({
   prompt: "select_account"
 });
