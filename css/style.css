@@ -129,29 +129,12 @@ body {
   color: #00bfff;
 }
 
-/* ===== ALERTA ===== */
-.alert {
-  text-align: center;
-  padding: 25px;
-  font-size: 14px;
-  opacity: 0.9;
-}
-
-/* ===== FOOTER ===== */
-.footer {
-  text-align: center;
-  padding: 25px;
-  font-size: 13px;
-  opacity: 0.6;
-}
-
-/* ===================== */
 /* ===== TOPO USUÁRIO ===== */
 .user-top {
   position: fixed;
   top: 15px;
   right: 15px;
-  display: flex;
+  display: none;
   align-items: center;
   gap: 10px;
   background: rgba(0,0,0,0.85);
@@ -172,7 +155,6 @@ body {
   color: #00bfff;
   font-size: 13px;
   font-weight: bold;
-  white-space: nowrap;
 }
 
 .user-top button {
@@ -184,7 +166,6 @@ body {
   cursor: pointer;
 }
 
-/* ===================== */
 /* ===== PERFIL ===== */
 .profile-card {
   max-width: 360px;
@@ -222,10 +203,4 @@ body {
   color: #000;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
-}
-
-.profile-card button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px #00bfff;
 }
