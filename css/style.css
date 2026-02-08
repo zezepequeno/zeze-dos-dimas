@@ -90,6 +90,12 @@ body {
   }
 }
 
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 10px rgba(0,191,255,0.4); }
+  50% { box-shadow: 0 0 25px rgba(0,191,255,0.9); }
+  100% { box-shadow: 0 0 10px rgba(0,191,255,0.4); }
+}
+
 /* ===== HEADER ===== */
 .header {
   text-align: center;
@@ -151,7 +157,7 @@ body {
   margin-bottom: 25px;
 }
 
-/* ===== SELECT / INPUT ===== */
+/* ===== SELECT ===== */
 select {
   width: 100%;
   padding: 12px 14px;
@@ -233,6 +239,7 @@ select:focus {
   );
   border: 1px solid rgba(0,191,255,0.6);
   box-shadow: 0 0 20px rgba(0,191,255,0.35);
+  animation: glowPulse 2.5s infinite;
 }
 
 #sensibilidade p {
@@ -277,16 +284,36 @@ select:focus {
   }
 }
 
-/* ===== EXTRA: BOTÕES COPIAR / SALVAR ===== */
-#resultado button {
-  min-width: 120px;
+/* =====================================================
+   🎰 EXTENSÃO CASSINO — ROLETAS / BAÚS
+   ===================================================== */
+
+.cassino-card {
+  border: 1px solid rgba(255,215,0,0.5);
+  box-shadow: 0 0 25px rgba(255,215,0,0.25);
 }
 
-#resultado button + button {
-  margin-left: 10px;
-  background: #00ff9c;
+.cassino-card h3 {
+  color: gold;
+  text-shadow: 0 0 10px rgba(255,215,0,0.6);
 }
 
-#resultado button + button:hover {
-  box-shadow: 0 0 12px #00ff9c;
+.cassino-card button {
+  background: linear-gradient(135deg, gold, #ff9f00);
+  color: #000;
+}
+
+.cassino-card button:hover {
+  box-shadow: 0 0 18px gold;
+}
+
+.resultado-cassino {
+  margin-top: 15px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.7);
+  border: 1px solid rgba(255,215,0,0.6);
+  color: gold;
+  font-weight: bold;
+  animation: fadeUp 0.6s ease;
 }
