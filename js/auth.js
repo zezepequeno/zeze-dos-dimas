@@ -1,20 +1,18 @@
 // Verifica autenticação
 auth.onAuthStateChanged(user => {
-  if (!user) {
-    loginComGoogle();
-  } else {
+  if (user) {
     console.log("Usuário logado:", user.displayName);
+  } else {
+    console.log("Usuário não logado");
   }
 });
 
-// Login Google
+// Login Google (somente quando clicar)
 function loginComGoogle() {
   auth.signInWithPopup(provider)
     .then(result => {
       console.log("Login realizado:", result.user.displayName);
-      if (window.location.pathname.includes("index.html")) {
-        window.location.href = "pages/perfil.html";
-      }
+      window.location.href = "pages/perfil.html";
     })
     .catch(error => {
       console.error("Erro no login:", error);
