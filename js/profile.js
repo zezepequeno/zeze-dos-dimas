@@ -1,13 +1,11 @@
 auth.onAuthStateChanged(user => {
   if (!user) {
-    // 🔒 Proteção: só entra logado
     window.location.href = "../index.html";
     return;
   }
 
   const uid = user.uid;
 
-  // 🔥 Busca dados no Firestore
   db.collection("usuarios").doc(uid).get()
     .then(doc => {
 
@@ -24,7 +22,6 @@ auth.onAuthStateChanged(user => {
           dados.foto || user.photoURL || "";
 
       } else {
-        // ⚠️ Fallback se não existir no banco
         document.getElementById("userName").textContent =
           user.displayName || "Usuário";
 
