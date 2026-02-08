@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Meu Perfil</title>
+
+  <!-- CSS -->
   <link rel="stylesheet" href="/zeze-dos-dimas/css/style.css">
 </head>
 <body>
 
   <div class="profile-card animate">
-    <img id="perfilFoto">
+    <img id="perfilFoto" alt="Foto do perfil">
     <h2 id="perfilNome"></h2>
     <p id="perfilEmail"></p>
 
@@ -16,14 +18,17 @@
     <button onclick="logout()">Sair</button>
   </div>
 
+  <!-- FIREBASE -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
+  <!-- SCRIPTS DO SITE -->
   <script src="/zeze-dos-dimas/js/firebase.js"></script>
   <script src="/zeze-dos-dimas/js/auth.js"></script>
   <script src="/zeze-dos-dimas/js/profile.js"></script>
 
+  <!-- NAVEGAÇÃO -->
   <script>
     function voltarSite() {
       window.location.href = "/zeze-dos-dimas/index.html";
