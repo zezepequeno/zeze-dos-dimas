@@ -11,6 +11,7 @@
 
 <h1>🛠️ PAINEL ADMIN</h1>
 <p id="adminEmail"></p>
+
 <div id="usersList"></div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -22,11 +23,26 @@
 <script>
 auth.onAuthStateChanged(async user => {
   if (!user || user.email !== "virtualinvest@gmail.com") {
-    alert("Acesso negado");
+    alert("Acesso negado.");
     window.location.href = "/zeze-dos-dimas/index.html";
+    return;
   }
 
-  document.getElementById("adminEmail").innerText = user.email;
+  document.getElementById("adminEmail").innerText = "Admin: " + user.email;
+
+  const list = document.getElementById("usersList");
+  const snap = await db.collection("usuarios").get();
+
+  snap.forEach(doc => {
+    const u = doc.data();
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <hr>
+      <b>${u.nome}</b> (${u.email})<br>
+      VIP: ${u.vip} | BAN: ${u.banido} | MOEDAS: ${u.moedas}
+    `;
+    list.appendChild(div);
+  });
 });
 </script>
 
