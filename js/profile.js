@@ -1,14 +1,16 @@
 auth.onAuthStateChanged(user => {
   if (!user) {
+    // 🔒 Proteção: só entra logado
     window.location.href = "../index.html";
     return;
   }
 
   const uid = user.uid;
 
-  // Busca dados no Firestore
+  // 🔥 Busca dados no Firestore
   db.collection("usuarios").doc(uid).get()
     .then(doc => {
+
       if (doc.exists) {
         const dados = doc.data();
 
@@ -22,7 +24,7 @@ auth.onAuthStateChanged(user => {
           dados.foto || user.photoURL || "";
 
       } else {
-        // Fallback se não existir no banco
+        // ⚠️ Fallback se não existir no banco
         document.getElementById("userName").textContent =
           user.displayName || "Usuário";
 
@@ -32,6 +34,7 @@ auth.onAuthStateChanged(user => {
         document.getElementById("userPhoto").src =
           user.photoURL || "";
       }
+
     })
     .catch(error => {
       console.error("Erro ao buscar dados do perfil:", error);
