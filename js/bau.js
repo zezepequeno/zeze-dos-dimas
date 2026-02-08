@@ -25,28 +25,29 @@ function abrirBau() {
     return;
   }
 
-  // 🎁 Feedback visual
+  // 🔒 Bloqueia spam
   if (botao) {
     botao.disabled = true;
     botao.innerText = "ABRINDO... 🎁";
     botao.style.opacity = "0.6";
   }
 
-  resultadoEl.classList.remove("show", "comum", "raro", "epico", "fail");
+  // 🔄 Reset visual
+  resultadoEl.className = "resultado-bau";
   resultadoEl.innerHTML = "🔓 Abrindo o baú...";
 
   setTimeout(() => {
-    const indiceSorteado = Math.floor(Math.random() * premios.length);
-    const premio = premios[indiceSorteado];
+    const indice = Math.floor(Math.random() * premios.length);
+    const premio = premios[indice];
 
     resultadoEl.innerHTML = `
       <div class="resultado-box ${premio.tipo}">
-        <strong>🎉 Resultado do Baú</strong><br><br>
-        ${premio.texto}
+        <strong>🎉 Resultado do Baú</strong>
+        <p>${premio.texto}</p>
       </div>
     `;
 
-    resultadoEl.classList.add("show", premio.tipo);
+    resultadoEl.classList.add("show");
 
     if (botao) {
       botao.disabled = false;
