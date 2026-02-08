@@ -5,53 +5,94 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZEZE DOS DIMAS | Free Fire</title>
 
-  <!-- CSS CORRETO -->
-  <link rel="stylesheet" href="/zeze-dos-dimas/css/style.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="/zeze/css/style.css">
+
+  <!-- FONTE -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- TOPO USUÁRIO LOGADO -->
-<div id="userTop" class="user-top">
-  <img id="userFoto" src="">
-  <span id="userNome"></span>
-  <span id="userBadge" class="badge" style="display:none;"></span>
-  <button id="btnAdmin" onclick="irParaAdmin()">ADMIN</button>
-  <button onclick="logout()">Sair</button>
-</div>
+  <!-- TOPO USUÁRIO LOGADO -->
+  <div id="userTop" class="user-top" style="display:none;">
+    <img id="userFoto" src="" alt="Foto do usuário">
+    <span id="userNome"></span>
+    <span id="userBadge" class="badge" style="display:none;"></span>
 
-<header class="header animate">
-  <h1>ZEZE DOS DIMAS</h1>
-  <p>Free Fire • Loja • Cassino • Sensibilidade</p>
-</header>
+    <button id="btnAdmin" onclick="irParaAdmin()" style="display:none;">
+      ADMIN
+    </button>
 
-<nav class="menu animate">
-  <a href="/zeze-dos-dimas/index.html">Home</a>
-  <a href="/zeze-dos-dimas/paginas/cassino.html">Cassino FF</a>
-  <a href="/zeze-dos-dimas/paginas/sensibilidade.html">Sensibilidade</a>
-</nav>
+    <button onclick="logout()">Sair</button>
+  </div>
 
-<section class="hero animate">
-  <h2>SUBA CAPA NO FREE FIRE 🔥</h2>
-  <p>Gerador de sensibilidade, loja gamer e cassino Free Fire</p>
+  <!-- HEADER -->
+  <header class="header animate">
+    <h1>ZEZE DOS DIMAS</h1>
+    <p>Free Fire • Loja • Cassino • Sensibilidade</p>
+  </header>
 
-  <button id="btnLogin" onclick="loginComGoogle()">ENTRAR COM GOOGLE</button>
-  <button id="btnPerfil" onclick="irParaPerfil()" style="display:none;">MEU PERFIL</button>
-</section>
+  <!-- MENU -->
+  <nav class="menu animate">
+    <a href="/zeze/index.html">Home</a>
+    <a href="/zeze/pages/cassino.html">Cassino FF</a>
+    <a href="/zeze/pages/sensibilidade.html">Sensibilidade</a>
+  </nav>
 
-<footer class="footer animate">
-  <p>© 2026 - ZEZE DOS DIMAS</p>
-</footer>
+  <!-- HERO -->
+  <section class="hero animate">
+    <h2>SUBA CAPA NO FREE FIRE 🔥</h2>
+    <p>Gerador de sensibilidade, loja gamer e cassino Free Fire</p>
 
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <button id="btnLogin" onclick="loginComGoogle()">
+      ENTRAR COM GOOGLE
+    </button>
 
-<script src="/zeze-dos-dimas/js/firebase.js"></script>
-<script src="/zeze-dos-dimas/js/auth.js"></script>
-<script src="/zeze-dos-dimas/js/admin-check.js"></script>
+    <button id="btnPerfil" onclick="irParaPerfil()" style="display:none;">
+      MEU PERFIL
+    </button>
+  </section>
+
+  <!-- CARDS -->
+  <section class="cards">
+    <div class="card animate">
+      <h3>🎯 Gerador de Sensibilidade</h3>
+      <p>Sensibilidades ajustadas para subir capa no Free Fire.</p>
+    </div>
+
+    <div class="card animate">
+      <h3>🎰 Cassino Free Fire</h3>
+      <p>Roleta e baús com prêmios, cupons e produtos.</p>
+    </div>
+
+    <div class="card animate">
+      <h3>🛒 Loja Gamer</h3>
+      <p>Produtos digitais, passes e serviços Free Fire.</p>
+    </div>
+  </section>
+
+  <!-- AVISO -->
+  <section class="alert animate">
+    <p>⚠️ Este site NÃO usa hack, xit ou arquivos modificados.</p>
+    <p>Tudo é baseado em configuração e experiência.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer animate">
+    <p>© 2026 - ZEZE DOS DIMAS</p>
+  </footer>
+
+  <!-- FIREBASE -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <!-- SCRIPTS DO SITE -->
+  <script src="/zeze/js/firebase.js"></script>
+  <script src="/zeze/js/auth.js"></script>
+  <script src="/zeze/js/admin-check.js"></script>
+  <script src="/zeze/js/main.js"></script>
 
 </body>
 </html>
