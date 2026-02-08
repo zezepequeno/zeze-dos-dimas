@@ -2,14 +2,47 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Painel Admin</title>
+  <title>Painel Admin | ZEZE DOS DIMAS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/zeze-dos-dimas/admin/admin.css">
+
+  <style>
+    body {
+      background: #0b0b0b;
+      color: #fff;
+      font-family: Orbitron, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .user-card {
+      background: #111;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .actions button {
+      margin: 5px 5px 0 0;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .ban { background: red; color: #fff; }
+    .vip { background: gold; color: #000; }
+    .coin { background: #00ff99; color: #000; }
+  </style>
 </head>
 
 <body>
 
-<h1>🛠️ PAINEL ADMIN</h1>
+<h1>🛠️ PAINEL ADMIN — NÍVEL X</h1>
 <p id="adminEmail"></p>
 
 <div id="usersList"></div>
@@ -21,29 +54,83 @@
 <script src="/zeze-dos-dimas/js/firebase.js"></script>
 
 <script>
+const ADMIN_EMAIL = "virtualinvest@gmail.com";
+
 auth.onAuthStateChanged(async user => {
-  if (!user || user.email !== "virtualinvest@gmail.com") {
+  if (!user || user.email !== ADMIN_EMAIL) {
     alert("Acesso negado.");
     window.location.href = "/zeze-dos-dimas/index.html";
     return;
   }
 
-  document.getElementById("adminEmail").innerText = "Admin: " + user.email;
+  document.getElementById("adminEmail").innerText = "Admin logado: " + user.email;
+  carregarUsuarios();
+});
 
+async function carregarUsuarios() {
   const list = document.getElementById("usersList");
+  list.innerHTML = "";
+
   const snap = await db.collection("usuarios").get();
 
   snap.forEach(doc => {
     const u = doc.data();
     const div = document.createElement("div");
+    div.className = "user-card";
+
     div.innerHTML = `
-      <hr>
-      <b>${u.nome}</b> (${u.email})<br>
-      VIP: ${u.vip} | BAN: ${u.banido} | MOEDAS: ${u.moedas}
+      <b>${u.nome || "Sem nome"}</b><br>
+      ${u.email}<br>
+      VIP: ${u.vip} | BANIDO: ${u.banido} | MOEDAS: ${u.moedas || 0}
+
+      <div class="actions">
+        <button class="ban" onclick="banir('${doc.id}', ${!u.banido})">
+          ${u.banido ? "DESBANIR" : "BANIR"}
+        </button>
+
+        <button class="vip" onclick="vip('${doc.id}', ${!u.vip})">
+          ${u.vip ? "REMOVER VIP" : "DAR VIP"}
+        </button>
+
+        <button class="coin" onclick="moedas('${doc.id}', 100)">+100 💰</button>
+        <button class="coin" onclick="moedas('${doc.id}', -100)">-100 💰</button>
+      </div>
     `;
+
     list.appendChild(div);
   });
-});
+}
+
+// ===== AÇÕES =====
+
+async function banir(uid, status) {
+  await db.collection("usuarios").doc(uid).update({ banido: status });
+  registrarLog(uid, status ? "BANIDO" : "DESBANIDO");
+  carregarUsuarios();
+}
+
+async function vip(uid, status) {
+  await db.collection("usuarios").doc(uid).update({ vip: status });
+  registrarLog(uid, status ? "VIP ATIVADO" : "VIP REMOVIDO");
+  carregarUsuarios();
+}
+
+async function moedas(uid, valor) {
+  await db.collection("usuarios").doc(uid).update({
+    moedas: firebase.firestore.FieldValue.increment(valor)
+  });
+  registrarLog(uid, valor > 0 ? `+${valor} MOEDAS` : `${valor} MOEDAS`);
+  carregarUsuarios();
+}
+
+// ===== LOGS =====
+function registrarLog(uid, acao) {
+  db.collection("admin_logs").add({
+    uid,
+    acao,
+    data: firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
 </script>
 
 </body>
