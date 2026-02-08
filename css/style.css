@@ -1,3 +1,4 @@
+
 /* ===== RESET ===== */
 * {
   margin: 0;
@@ -202,6 +203,7 @@ body {
   color: #000;
   font-weight: bold;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .card button:hover {
@@ -244,4 +246,18 @@ body {
   .menu {
     gap: 10px;
   }
+}
+
+/* ===== EXTRA: BOTÕES COPIAR / SALVAR ===== */
+#resultado button {
+  min-width: 120px;
+}
+
+#resultado button + button {
+  margin-left: 10px;
+  background: #00ff9c;
+}
+
+#resultado button + button:hover {
+  box-shadow: 0 0 12px #00ff9c;
 }
