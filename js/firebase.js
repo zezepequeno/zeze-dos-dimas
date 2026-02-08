@@ -3,7 +3,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyCWFLa-oKekYvvEhaxL_S8NZopxI-GID60",
   authDomain: "zeze-dos-dimas.firebaseapp.com",
   projectId: "zeze-dos-dimas",
-  storageBucket: "zeze-dos-dimas.firebasestorage.app",
+  storageBucket: "zeze-dos-dimas.appspot.com", // ✅ CORRIGIDO
   messagingSenderId: "831377776200",
   appId: "1:831377776200:web:089b2ff4120db93325827d",
   measurementId: "G-YNDH2FH765"
