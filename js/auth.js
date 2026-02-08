@@ -23,7 +23,6 @@ auth.onAuthStateChanged(async user => {
 
   const dados = snap.data();
 
-  // 🚫 BANIMENTO
   if (dados.banido) {
     alert("Sua conta foi banida.");
     await auth.signOut();
@@ -35,15 +34,13 @@ auth.onAuthStateChanged(async user => {
   btnPerfil && (btnPerfil.style.display = "inline-block");
   userTop && (userTop.style.display = "flex");
 
-  if (userFoto) userFoto.src = user.photoURL || "";
-  if (userNome) userNome.textContent = user.displayName || "Usuário";
+  userFoto && (userFoto.src = user.photoURL || "");
+  userNome && (userNome.textContent = user.displayName || "Usuário");
 
   if (userBadge) {
+    userBadge.style.display = "inline-block";
     userBadge.textContent = dados.vip ? "VIP 🔥" : "FREE";
   }
 
-  // 🔑 BOTÃO ADMIN
-  if (btnAdmin) {
-    btnAdmin.style.display = user.email === ADMIN_EMAIL ? "inline-block" : "none";
-  }
+  btnAdmin && (btnAdmin.style.display = user.email === ADMIN_EMAIL ? "inline-block" : "none");
 });
