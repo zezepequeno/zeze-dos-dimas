@@ -101,7 +101,7 @@ function irParaPerfil() {
 }
 
 function irParaAdmin() {
-  window.location.href = "/zeze-dos-dimas/pages/admin.html";
+  window.location.href = "/zeze-dos-dimas/admin/admin.html";
 }
 
 function logout() {
