@@ -6,13 +6,13 @@
 
   <title>ZEZE DOS DIMAS | Free Fire</title>
 
-  <!-- CSS (forçando carregamento no GitHub Pages) -->
-  <link rel="stylesheet" href="./css/style.css?v=5">
+  <!-- CSS (corrigido para GitHub Pages) -->
+  <link rel="stylesheet" href="./CSS/style.css?v=5">
 
   <!-- Fonte -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- RESET + BASE (NÃO REMOVE NADA, SÓ GARANTE VISUAL) -->
+  <!-- RESET + BASE -->
   <style>
     * {
       margin: 0;
@@ -24,7 +24,7 @@
     body {
       background: #0b0b0b;
       color: #fff;
-      padding-top: 80px; /* espaço pro topo do usuário */
+      padding-top: 80px;
     }
 
     a {
@@ -40,7 +40,7 @@
 
 <body>
 
-  <!-- TOPO USUÁRIO (LOGADO) -->
+  <!-- TOPO USUÁRIO -->
   <div id="userTop" class="user-top" style="display:none;">
     <img id="userFoto" src="" alt="Foto do usuário">
     <span id="userNome"></span>
@@ -56,8 +56,8 @@
   <!-- MENU -->
   <nav class="menu animate">
     <a href="index.html">Home</a>
-    <a href="pages/cassino.html">Cassino FF</a>
-    <a href="pages/sensibilidade.html">Sensibilidade</a>
+    <a href="páginas/cassino.html">Cassino FF</a>
+    <a href="páginas/sensibilidade.html">Sensibilidade</a>
   </nav>
 
   <!-- HERO -->
@@ -65,12 +65,10 @@
     <h2>SUBA CAPA NO FREE FIRE 🔥</h2>
     <p>Gerador de sensibilidade, loja gamer e cassino Free Fire</p>
 
-    <!-- BOTÃO LOGIN -->
     <button id="btnLogin" onclick="loginComGoogle()">
       ENTRAR COM GOOGLE
     </button>
 
-    <!-- BOTÃO PERFIL -->
     <button id="btnPerfil" style="display:none;" onclick="irParaPerfil()">
       MEU PERFIL
     </button>
@@ -110,7 +108,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-  <!-- SEUS SCRIPTS -->
+  <!-- SCRIPTS -->
   <script src="js/firebase.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
