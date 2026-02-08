@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel Admin | ZEZE DOS DIMAS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="stylesheet" href="/zeze-dos-dimas/admin/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="admin-header">
+    <h1>🛠️ PAINEL ADMIN</h1>
+    <button onclick="voltarSite()">⬅ Voltar ao site</button>
+  </header>
+
+  <section class="admin-info">
+    <p id="adminEmail"></p>
+  </section>
+
+  <section class="users-section">
+    <h2>👥 Usuários</h2>
+    <div id="usersList" class="users-list"></div>
+  </section>
+
+  <!-- FIREBASE -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <!-- SCRIPTS -->
+  <script src="/zeze-dos-dimas/js/firebase.js"></script>
+  <script src="/zeze-dos-dimas/js/auth.js"></script>
+  <script src="/zeze-dos-dimas/admin/admin.js"></script>
+
+  <script>
+    function voltarSite() {
+      window.location.href = "/zeze-dos-dimas/index.html";
+    }
+  </script>
+
+</body>
+</html>
