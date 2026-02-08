@@ -3,43 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Meu Perfil</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="/zeze-dos-dimas/css/style.css">
 </head>
 <body>
 
   <div class="profile-card animate">
-    <img id="perfilFoto" src="">
+    <img id="perfilFoto">
     <h2 id="perfilNome"></h2>
     <p id="perfilEmail"></p>
 
-    <!-- BOTÕES -->
     <button onclick="voltarSite()">⬅ Voltar para o site</button>
     <button onclick="logout()">Sair</button>
   </div>
 
-  <!-- FIREBASE -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-  <!-- SCRIPTS -->
-  <script src="../js/firebase.js"></script>
-  <script src="../js/auth.js"></script>
+  <script src="/zeze-dos-dimas/js/firebase.js"></script>
+  <script src="/zeze-dos-dimas/js/auth.js"></script>
+  <script src="/zeze-dos-dimas/js/profile.js"></script>
 
   <script>
-    auth.onAuthStateChanged(user => {
-      if (!user) {
-        window.location.href = "/zeze/index.html";
-        return;
-      }
-
-      document.getElementById("perfilFoto").src = user.photoURL || "";
-      document.getElementById("perfilNome").textContent = user.displayName || "";
-      document.getElementById("perfilEmail").textContent = user.email || "";
-    });
-
     function voltarSite() {
-      window.location.href = "/zeze/index.html";
+      window.location.href = "/zeze-dos-dimas/index.html";
     }
   </script>
 
