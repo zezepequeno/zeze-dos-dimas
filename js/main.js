@@ -11,7 +11,7 @@ const observer = new IntersectionObserver(entries => {
 
 animatedElements.forEach(el => observer.observe(el));
 
-// ===== ROLETAS E BAÚS =====
+// ===== ROLETAS =====
 function girarRoleta() {
   const premios = [
     "Cupom 10% OFF",
@@ -28,10 +28,12 @@ function girarRoleta() {
   setTimeout(() => {
     const sorteio = Math.floor(Math.random() * premios.length);
     resultado.classList.remove("loading");
-    resultado.innerHTML = "🎉 Você ganhou: <strong>" + premios[sorteio] + "</strong>";
+    resultado.innerHTML =
+      "🎉 Você ganhou: <strong>" + premios[sorteio] + "</strong>";
   }, 1500);
 }
 
+// ===== BAÚ =====
 function abrirBau() {
   const premiosBau = [
     "Cupom 5% OFF",
@@ -47,6 +49,7 @@ function abrirBau() {
   setTimeout(() => {
     const sorteio = Math.floor(Math.random() * premiosBau.length);
     resultado.classList.remove("loading");
-    resultado.innerHTML = "🎁 Prêmio do baú: <strong>" + premiosBau[sorteio] + "</strong>";
+    resultado.innerHTML =
+      "🎁 Prêmio do baú: <strong>" + premiosBau[sorteio] + "</strong>";
   }, 1500);
 }
