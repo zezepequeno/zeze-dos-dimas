@@ -1,6 +1,6 @@
 auth.onAuthStateChanged(user => {
   if (!user) {
-    window.location.href = "../index.html";
+    window.location.href = "/zeze-dos-dimas/index.html";
     return;
   }
 
@@ -8,30 +8,18 @@ auth.onAuthStateChanged(user => {
 
   db.collection("usuarios").doc(uid).get()
     .then(doc => {
-
       if (doc.exists) {
         const dados = doc.data();
 
-        document.getElementById("userName").textContent =
+        document.getElementById("perfilNome").textContent =
           dados.nome || user.displayName || "Usuário";
 
-        document.getElementById("userEmail").textContent =
+        document.getElementById("perfilEmail").textContent =
           dados.email || user.email || "";
 
-        document.getElementById("userPhoto").src =
+        document.getElementById("perfilFoto").src =
           dados.foto || user.photoURL || "";
-
-      } else {
-        document.getElementById("userName").textContent =
-          user.displayName || "Usuário";
-
-        document.getElementById("userEmail").textContent =
-          user.email || "";
-
-        document.getElementById("userPhoto").src =
-          user.photoURL || "";
       }
-
     })
     .catch(error => {
       console.error("Erro ao buscar dados do perfil:", error);
