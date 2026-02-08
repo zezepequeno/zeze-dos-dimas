@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador de Sensibilidade FF</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <h1>GERADOR DE SENSIBILIDADE</h1>
+    <p>Free Fire • Subir capa • Mobile</p>
+  </header>
+
+  <nav class="menu">
+    <a href="../index.html">Home</a>
+    <a href="cassino.html">Cassino FF</a>
+  </nav>
+
+  <section class="hero">
+    <h2>Escolha seu celular</h2>
+    <p>Gere uma sensibilidade ajustada para subir capa 🔥</p>
+  </section>
+
+  <section class="cards">
+
+    <div class="card">
+      <label>Marca do celular</label><br><br>
+      <select id="marca">
+        <option value="samsung">Samsung</option>
+        <option value="xiaomi">Xiaomi</option>
+        <option value="motorola">Motorola</option>
+        <option value="iphone">iPhone</option>
+        <option value="outros">Outros</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <label>Desempenho do aparelho</label><br><br>
+      <select id="desempenho">
+        <option value="fraco">Fraco</option>
+        <option value="medio">Médio</option>
+        <option value="forte">Forte</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <button onclick="gerarSensibilidade()">
+        GERAR SENSIBILIDADE 🎯
+      </button>
+    </div>
+
+    <div class="card" id="resultado" style="display:none;">
+      <h3>Sua Sensibilidade</h3>
+      <p id="sensibilidade"></p>
+    </div>
+
+  </section>
+
+  <section class="alert">
+    <p>⚠️ Não é hack, não é xit.</p>
+    <p>Apenas configuração baseada em experiência.</p>
+  </section>
+
+  <script src="../js/sensi.js"></script>
+
+</body>
+</html>
