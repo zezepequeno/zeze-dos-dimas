@@ -17,7 +17,9 @@ body {
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
-  padding-top: 20px; /* 🔥 CORREÇÃO PRINCIPAL */
+
+  /* 🔥 AJUSTE: compatível com user-top fixo */
+  padding-top: 80px;
 }
 
 /* ===== ANIMAÇÃO ===== */
@@ -60,7 +62,7 @@ body {
   gap: 15px;
   margin-bottom: 40px;
   flex-wrap: wrap;
-  padding: 0 15px; /* 🔥 */
+  padding: 0 15px;
 }
 
 .menu a {
@@ -140,7 +142,7 @@ body {
   color: #00bfff;
 }
 
-/* ===== TOPO USUÁRIO ===== */
+/* ===== TOPO USUÁRIO (LOGIN / ADMIN / VIP) ===== */
 .user-top {
   position: fixed;
   top: 15px;
@@ -173,6 +175,25 @@ body {
   text-overflow: ellipsis;
 }
 
+/* ===== BADGES ===== */
+.badge {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.badge.admin {
+  background: red;
+  color: #fff;
+}
+
+.badge.vip {
+  background: gold;
+  color: #000;
+}
+
+/* ===== BOTÕES TOPO ===== */
 .user-top button {
   background: #ff3b3b;
   border: none;
@@ -181,6 +202,11 @@ body {
   border-radius: 14px;
   cursor: pointer;
   font-size: 12px;
+}
+
+#btnAdmin {
+  background: gold;
+  color: #000;
 }
 
 /* ===== PERFIL ===== */
@@ -222,11 +248,19 @@ body {
   cursor: pointer;
 }
 
-/* ===== AJUSTES MOBILE (SEM REMOVER NADA) ===== */
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 25px 10px;
+  opacity: 0.7;
+  font-size: 13px;
+}
+
+/* ===== AJUSTES MOBILE ===== */
 @media (max-width: 480px) {
 
   body {
-    padding-top: 10px;
+    padding-top: 90px;
   }
 
   .header h1 {
