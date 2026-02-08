@@ -5,23 +5,32 @@
   <title>Painel Admin | ZEZE DOS DIMAS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- CSS ADMIN -->
   <link rel="stylesheet" href="/zeze-dos-dimas/admin/admin.css">
+
+  <!-- FONTE -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
+  <!-- HEADER ADMIN -->
   <header class="admin-header">
     <h1>🛠️ PAINEL ADMIN</h1>
     <button onclick="voltarSite()">⬅ Voltar ao site</button>
   </header>
 
+  <!-- INFO ADMIN -->
   <section class="admin-info">
-    <p id="adminEmail"></p>
+    <p id="adminEmail">Carregando...</p>
   </section>
 
+  <!-- USUÁRIOS -->
   <section class="users-section">
     <h2>👥 Usuários</h2>
-    <div id="usersList" class="users-list"></div>
+    <div id="usersList" class="users-list">
+      <!-- usuários aparecem aqui -->
+    </div>
   </section>
 
   <!-- FIREBASE -->
@@ -29,11 +38,14 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-  <!-- SCRIPTS -->
+  <!-- SCRIPTS DO SITE -->
   <script src="/zeze-dos-dimas/js/firebase.js"></script>
   <script src="/zeze-dos-dimas/js/auth.js"></script>
+
+  <!-- SCRIPT ADMIN -->
   <script src="/zeze-dos-dimas/admin/admin.js"></script>
 
+  <!-- FUNÇÃO VOLTAR -->
   <script>
     function voltarSite() {
       window.location.href = "/zeze-dos-dimas/index.html";
