@@ -9,36 +9,31 @@ auth.onAuthStateChanged(user => {
   // Busca dados no Firestore
   db.collection("usuarios").doc(uid).get()
     .then(doc => {
-      let nome, email, foto;
-
       if (doc.exists) {
         const dados = doc.data();
-        nome = dados.nome;
-        email = dados.email;
-        foto = dados.foto;
+
+        document.getElementById("userName").textContent =
+          dados.nome || user.displayName || "Usuário";
+
+        document.getElementById("userEmail").textContent =
+          dados.email || user.email || "";
+
+        document.getElementById("userPhoto").src =
+          dados.foto || user.photoURL || "";
+
+      } else {
+        // Fallback se não existir no banco
+        document.getElementById("userName").textContent =
+          user.displayName || "Usuário";
+
+        document.getElementById("userEmail").textContent =
+          user.email || "";
+
+        document.getElementById("userPhoto").src =
+          user.photoURL || "";
       }
-
-      // Fallback seguro
-      document.getElementById("userName").textContent =
-        nome || user.displayName || "Usuário";
-
-      document.getElementById("userEmail").textContent =
-        email || user.email || "";
-
-      document.getElementById("userPhoto").src =
-        foto || user.photoURL || "";
     })
     .catch(error => {
       console.error("Erro ao buscar dados do perfil:", error);
-
-      // Fallback total
-      document.getElementById("userName").textContent =
-        user.displayName || "Usuário";
-
-      document.getElementById("userEmail").textContent =
-        user.email || "";
-
-      document.getElementById("userPhoto").src =
-        user.photoURL || "";
     });
 });
