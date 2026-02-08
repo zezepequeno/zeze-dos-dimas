@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -5,54 +6,67 @@
   <title>Cassino Free Fire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- CSS GLOBAL -->
   <link rel="stylesheet" href="../css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header class="header animate">
-  <h1>🎰 CASSINO FREE FIRE</h1>
-  <p>Roleta • Baús • Prêmios</p>
-</header>
+  <!-- HEADER -->
+  <header class="header animate">
+    <h1>🎰 CASSINO FREE FIRE</h1>
+    <p>Roleta • Baús • Prêmios</p>
+  </header>
 
-<nav class="menu animate">
-  <a href="../index.html">Home</a>
-  <a href="sensibilidade.html">Sensibilidade</a>
-</nav>
+  <!-- MENU -->
+  <nav class="menu animate">
+    <a href="../index.html">Home</a>
+    <a href="sensibilidade.html">Sensibilidade</a>
+  </nav>
 
-<section class="cards">
+  <!-- CARDS -->
+  <section class="cards">
 
-  <!-- ROLETA -->
-  <div class="card animate">
-    <h3>🎡 Roleta Premiada</h3>
-    <p>Tente a sorte e ganhe prêmios</p>
+    <!-- ROLETA -->
+    <div class="card animate">
+      <h3>🎡 Roleta Premiada</h3>
+      <p>Gire a roleta e tente a sorte</p>
 
-    <button onclick="girarRoleta()">GIRAR ROLETA</button>
-    <p id="resultadoRoleta" style="margin-top:15px;"></p>
-  </div>
+      <button onclick="girarRoleta()">
+        GIRAR ROLETA
+      </button>
 
-  <!-- BAÚ -->
-  <div class="card animate">
-    <h3>🎁 Baú Misterioso</h3>
-    <p>Abra e receba um prêmio surpresa</p>
+      <div id="resultadoRoleta" style="margin-top:15px; font-weight:bold;"></div>
+    </div>
 
-    <button onclick="abrirBau()">ABRIR BAÚ</button>
-    <p id="resultadoBau" style="margin-top:15px;"></p>
-  </div>
+    <!-- BAÚ -->
+    <div class="card animate">
+      <h3>🎁 Baú Misterioso</h3>
+      <p>Abra e receba um prêmio surpresa</p>
 
-</section>
+      <button onclick="abrirBau()">
+        ABRIR BAÚ
+      </button>
 
-<section class="alert animate">
-  <p>⚠️ Prêmios demonstrativos.</p>
-  <p>Entrega manual nesta versão.</p>
-</section>
+      <div id="resultadoBau" style="margin-top:15px; font-weight:bold;"></div>
+    </div>
 
-<footer class="footer">
-  <p>© 2026 - ZEZE DOS DIMAS</p>
-</footer>
+  </section>
 
-<script src="../js/roleta.js"></script>
-<script src="../js/bau.js"></script>
+  <!-- AVISO -->
+  <section class="alert animate">
+    <p>⚠️ Prêmios demonstrativos.</p>
+    <p>Entrega manual nesta versão.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2026 - ZEZE DOS DIMAS</p>
+  </footer>
+
+  <!-- JS -->
+  <script src="../js/roleta.js"></script>
+  <script src="../js/bau.js"></script>
 
 </body>
 </html>
