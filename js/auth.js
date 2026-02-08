@@ -21,7 +21,6 @@ auth.onAuthStateChanged(async user => {
     if (userFoto) userFoto.src = user.photoURL || "";
     if (userNome) userNome.textContent = user.displayName || "Usuário";
 
-    // ADMIN
     if (btnAdmin && user.email === ADMIN_EMAIL) {
       btnAdmin.style.display = "inline-block";
     }
@@ -50,7 +49,6 @@ function loginComGoogle() {
         uid,
         provider: "google",
 
-        // DADOS PRINCIPAIS
         dadosPrincipais: {
           uid,
           nome: user.displayName || "",
@@ -62,18 +60,15 @@ function loginComGoogle() {
           ultimoLoginAuth: user.metadata.lastSignInTime
         },
 
-        // ATALHOS
         nome: user.displayName || "",
         email: user.email || "",
         foto: user.photoURL || "",
 
-        // STATUS
         vip: false,
         nivel: "free",
         banido: false,
         admin: user.email === ADMIN_EMAIL,
 
-        // CONTROLE
         acessos: 1,
         compras: 0,
         moedas: 0,
@@ -89,7 +84,7 @@ function loginComGoogle() {
       });
     }
 
-    window.location.href = "pages/perfil.html";
+    window.location.href = "/zeze/pages/perfil.html";
   })
   .catch(err => {
     console.error(err);
@@ -101,15 +96,15 @@ function loginComGoogle() {
 // NAVEGAÇÃO
 // ===============================
 function irParaPerfil() {
-  window.location.href = "pages/perfil.html";
+  window.location.href = "/zeze/pages/perfil.html";
 }
 
 function irParaAdmin() {
-  window.location.href = "pages/admin.html";
+  window.location.href = "/zeze/pages/admin.html";
 }
 
 function logout() {
   auth.signOut().then(() => {
-    window.location.href = "../index.html";
+    window.location.href = "/zeze/index.html";
   });
 }
