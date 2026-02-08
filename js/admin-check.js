@@ -1,13 +1,9 @@
 const ADMIN_EMAIL = "virtualinvest@gmail.com";
 
-auth.onAuthStateChanged(async user => {
+auth.onAuthStateChanged(user => {
   const btnAdmin = document.getElementById("btnAdmin");
+  if (!btnAdmin) return;
 
-  if (!user) return;
-
-  if (user.email === ADMIN_EMAIL) {
-    btnAdmin && (btnAdmin.style.display = "inline-block");
-  } else {
-    btnAdmin && (btnAdmin.style.display = "none");
-  }
+  btnAdmin.style.display =
+    user && user.email === ADMIN_EMAIL ? "inline-block" : "none";
 });
