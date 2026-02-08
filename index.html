@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZEZE DOS DIMAS | Free Fire</title>
 
-  <link rel="stylesheet" href="/zeze-dos-dimas/css/style.css?v=5">
+  <link rel="stylesheet" href="/zeze/css/style.css?v=5">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -32,7 +32,7 @@
       display: none;
       align-items: center;
       justify-content: flex-end;
-      gap: 12px;
+      gap: 10px;
       padding: 0 20px;
       z-index: 999;
     }
@@ -42,6 +42,16 @@
       height: 40px;
       border-radius: 50%;
     }
+
+    .badge {
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .badge.admin { background: red; }
+    .badge.vip { background: gold; color: #000; }
 
     .user-top button {
       background: #ff0033;
@@ -62,44 +72,45 @@
 
 <body>
 
-  <!-- TOPO USUÁRIO -->
-  <div id="userTop" class="user-top">
-    <img id="userFoto">
-    <span id="userNome"></span>
-    <button id="btnAdmin" onclick="irParaAdmin()">ADMIN</button>
-    <button onclick="logout()">Sair</button>
-  </div>
+<!-- TOPO USUÁRIO LOGADO -->
+<div id="userTop" class="user-top">
+  <img id="userFoto" src="">
+  <span id="userNome"></span>
+  <span id="userBadge" class="badge" style="display:none;"></span>
+  <button id="btnAdmin" onclick="irParaAdmin()">ADMIN</button>
+  <button onclick="logout()">Sair</button>
+</div>
 
-  <header class="header animate">
-    <h1>ZEZE DOS DIMAS</h1>
-    <p>Free Fire • Loja • Cassino • Sensibilidade</p>
-  </header>
+<header class="header animate">
+  <h1>ZEZE DOS DIMAS</h1>
+  <p>Free Fire • Loja • Cassino • Sensibilidade</p>
+</header>
 
-  <nav class="menu animate">
-    <a href="/zeze-dos-dimas/index.html">Home</a>
-    <a href="/zeze-dos-dimas/pages/cassino.html">Cassino FF</a>
-    <a href="/zeze-dos-dimas/pages/sensibilidade.html">Sensibilidade</a>
-  </nav>
+<nav class="menu animate">
+  <a href="/zeze/index.html">Home</a>
+  <a href="/zeze/pages/cassino.html">Cassino FF</a>
+  <a href="/zeze/pages/sensibilidade.html">Sensibilidade</a>
+</nav>
 
-  <section class="hero animate">
-    <h2>SUBA CAPA NO FREE FIRE 🔥</h2>
-    <p>Gerador de sensibilidade, loja gamer e cassino Free Fire</p>
+<section class="hero animate">
+  <h2>SUBA CAPA NO FREE FIRE 🔥</h2>
+  <p>Gerador de sensibilidade, loja gamer e cassino Free Fire</p>
 
-    <button id="btnLogin" onclick="loginComGoogle()">ENTRAR COM GOOGLE</button>
-    <button id="btnPerfil" onclick="irParaPerfil()" style="display:none;">MEU PERFIL</button>
-  </section>
+  <button id="btnLogin" onclick="loginComGoogle()">ENTRAR COM GOOGLE</button>
+  <button id="btnPerfil" onclick="irParaPerfil()" style="display:none;">MEU PERFIL</button>
+</section>
 
-  <footer class="footer animate">
-    <p>© 2026 - ZEZE DOS DIMAS</p>
-  </footer>
+<footer class="footer animate">
+  <p>© 2026 - ZEZE DOS DIMAS</p>
+</footer>
 
-  <!-- FIREBASE -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-  <script src="/zeze-dos-dimas/js/firebase.js"></script>
-  <script src="/zeze-dos-dimas/js/auth.js"></script>
-  <script src="/zeze-dos-dimas/js/admin-check.js"></script>
+<script src="/zeze/js/firebase.js"></script>
+<script src="/zeze/js/auth.js"></script>
+<script src="/zeze/js/admin-check.js"></script>
+
 </body>
 </html>
