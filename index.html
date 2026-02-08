@@ -6,8 +6,10 @@
 
   <title>ZEZE DOS DIMAS | Free Fire</title>
 
-  <link rel="stylesheet" href="/zeze-dos-dimas/css/style.css?v=5">
+  <!-- CSS -->
+  <link rel="stylesheet" href="/zeze/css/style.css?v=5">
 
+  <!-- Fonte -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -31,37 +33,72 @@
 
     button {
       font-family: 'Orbitron', sans-serif;
+      cursor: pointer;
+    }
+
+    .user-top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: #111;
+      display: none;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 15px;
+      padding: 0 20px;
+      z-index: 999;
+    }
+
+    .user-top img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .user-top button {
+      background: #ff0033;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      color: #fff;
     }
   </style>
 </head>
 
 <body>
 
+  <!-- TOPO USUÁRIO LOGADO -->
   <div id="userTop" class="user-top">
     <img id="userFoto" src="">
     <span id="userNome"></span>
     <button onclick="logout()">Sair</button>
   </div>
 
+  <!-- HEADER -->
   <header class="header animate">
     <h1>ZEZE DOS DIMAS</h1>
     <p>Free Fire • Loja • Cassino • Sensibilidade</p>
   </header>
 
+  <!-- MENU -->
   <nav class="menu animate">
-    <a href="/zeze-dos-dimas/index.html">Home</a>
-    <a href="/zeze-dos-dimas/pages/cassino.html">Cassino FF</a>
-    <a href="/zeze-dos-dimas/pages/sensibilidade.html">Sensibilidade</a>
+    <a href="/zeze/index.html">Home</a>
+    <a href="/zeze/pages/cassino.html">Cassino FF</a>
+    <a href="/zeze/pages/sensibilidade.html">Sensibilidade</a>
   </nav>
 
+  <!-- HERO -->
   <section class="hero animate">
     <h2>SUBA CAPA NO FREE FIRE 🔥</h2>
     <p>Gerador de sensibilidade, loja gamer e cassino Free Fire</p>
 
     <button id="btnLogin" onclick="loginComGoogle()">ENTRAR COM GOOGLE</button>
-    <button id="btnPerfil" onclick="irParaPerfil()">MEU PERFIL</button>
+    <button id="btnPerfil" onclick="irParaPerfil()" style="display:none;">MEU PERFIL</button>
   </section>
 
+  <!-- CARDS -->
   <section class="cards">
     <div class="card animate">
       <h3>🎯 Gerador de Sensibilidade</h3>
@@ -79,22 +116,26 @@
     </div>
   </section>
 
+  <!-- ALERTA -->
   <section class="alert animate">
     <p>⚠️ Este site NÃO usa hack, xit ou arquivos modificados.</p>
     <p>Tudo é baseado em configuração e experiência.</p>
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer animate">
     <p>© 2026 - ZEZE DOS DIMAS</p>
   </footer>
 
+  <!-- FIREBASE -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-  <script src="/zeze-dos-dimas/js/firebase.js"></script>
-  <script src="/zeze-dos-dimas/js/auth.js"></script>
-  <script src="/zeze-dos-dimas/js/main.js"></script>
+  <!-- JS DO SITE -->
+  <script src="/zeze/js/firebase.js"></script>
+  <script src="/zeze/js/auth.js"></script>
+  <script src="/zeze/js/main.js"></script>
 
 </body>
 </html>
