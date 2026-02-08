@@ -1,61 +1,34 @@
 const ADMIN_EMAIL = "virtualinvest@gmail.com";
 
-auth.onAuthStateChanged(user => {
+auth.onAuthStateChanged(async user => {
   const btnLogin = document.getElementById("btnLogin");
   const btnPerfil = document.getElementById("btnPerfil");
   const userTop = document.getElementById("userTop");
   const userFoto = document.getElementById("userFoto");
   const userNome = document.getElementById("userNome");
+  const userBadge = document.getElementById("userBadge");
+  const btnAdmin = document.getElementById("btnAdmin");
 
-  if (user) {
-    btnLogin && (btnLogin.style.display = "none");
-    btnPerfil && (btnPerfil.style.display = "inline-block");
-
-    userTop && (userTop.style.display = "flex");
-    userFoto && (userFoto.src = user.photoURL || "");
-    userNome && (userNome.textContent = user.displayName || "Usuário");
-
-  } else {
+  if (!user) {
     btnLogin && (btnLogin.style.display = "inline-block");
     btnPerfil && (btnPerfil.style.display = "none");
     userTop && (userTop.style.display = "none");
+    return;
   }
-});
 
-function loginComGoogle() {
-  auth.signInWithPopup(provider).then(async res => {
-    const user = res.user;
-    const ref = db.collection("usuarios").doc(user.uid);
-    const snap = await ref.get();
+  const ref = db.collection("usuarios").doc(user.uid);
+  const snap = await ref.get();
+  if (!snap.exists) return;
 
-    if (!snap.exists) {
-      await ref.set({
-        uid: user.uid,
-        nome: user.displayName,
-        email: user.email,
-        foto: user.photoURL,
-        admin: user.email === ADMIN_EMAIL,
-        vip: false,
-        banido: false,
-        moedas: 0,
-        criadoEm: firebase.firestore.FieldValue.serverTimestamp()
-      });
-    }
+  const dados = snap.data();
 
-    window.location.href = "/zeze-dos-dimas/pages/perfil.html";
-  });
-}
+  // 🚫 BANIMENTO
+  if (dados.banido) {
+    alert("Sua conta foi banida.");
+    await auth.signOut();
+    window.location.href = "/zeze/index.html";
+    return;
+  }
 
-function irParaPerfil() {
-  window.location.href = "/zeze-dos-dimas/pages/perfil.html";
-}
-
-function irParaAdmin() {
-  window.location.href = "/zeze-dos-dimas/admin/admin.html";
-}
-
-function logout() {
-  auth.signOut().then(() => {
-    window.location.href = "/zeze-dos-dimas/index.html";
-  });
-}
+  btnLogin.style.display = "none";
+  btnPerfil.style.display =
