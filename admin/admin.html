@@ -2,55 +2,33 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Painel Admin | ZEZE DOS DIMAS</title>
+  <title>Painel Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- CSS ADMIN -->
   <link rel="stylesheet" href="/zeze-dos-dimas/admin/admin.css">
-
-  <!-- FONTE -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- HEADER ADMIN -->
-  <header class="admin-header">
-    <h1>🛠️ PAINEL ADMIN</h1>
-    <button onclick="voltarSite()">⬅ Voltar ao site</button>
-  </header>
+<h1>🛠️ PAINEL ADMIN</h1>
+<p id="adminEmail"></p>
+<div id="usersList"></div>
 
-  <!-- INFO ADMIN -->
-  <section class="admin-info">
-    <p id="adminEmail">Carregando...</p>
-  </section>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-  <!-- USUÁRIOS -->
-  <section class="users-section">
-    <h2>👥 Usuários</h2>
-    <div id="usersList" class="users-list">
-      <!-- usuários aparecem aqui -->
-    </div>
-  </section>
+<script src="/zeze-dos-dimas/js/firebase.js"></script>
 
-  <!-- FIREBASE -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+auth.onAuthStateChanged(async user => {
+  if (!user || user.email !== "virtualinvest@gmail.com") {
+    alert("Acesso negado");
+    window.location.href = "/zeze-dos-dimas/index.html";
+  }
 
-  <!-- SCRIPTS DO SITE -->
-  <script src="/zeze-dos-dimas/js/firebase.js"></script>
-  <script src="/zeze-dos-dimas/js/auth.js"></script>
-
-  <!-- SCRIPT ADMIN -->
-  <script src="/zeze-dos-dimas/admin/admin.js"></script>
-
-  <!-- FUNÇÃO VOLTAR -->
-  <script>
-    function voltarSite() {
-      window.location.href = "/zeze-dos-dimas/index.html";
-    }
-  </script>
+  document.getElementById("adminEmail").innerText = user.email;
+});
+</script>
 
 </body>
 </html>
