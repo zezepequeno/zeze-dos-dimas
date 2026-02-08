@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZEZE DOS DIMAS | Free Fire</title>
 
-  <!-- CSS (RELATIVO - NÃO QUEBRA) -->
+  <!-- CSS RELATIVO (CORRETO) -->
   <link rel="stylesheet" href="css/style.css">
 
   <!-- FONTE -->
@@ -14,41 +14,33 @@
 
 <body>
 
-  <!-- TOPO USUÁRIO LOGADO -->
-  <div id="userTop" class="user-top" style="display:none;">
+  <!-- TOPO USUÁRIO -->
+  <div id="userTop" class="user-top">
     <img id="userFoto" src="">
     <span id="userNome"></span>
     <span id="userBadge" class="badge" style="display:none;"></span>
 
-    <button id="btnAdmin" onclick="irParaAdmin()" style="display:none;">
-      ADMIN
-    </button>
-
+    <button id="btnAdmin" onclick="irParaAdmin()">ADMIN</button>
     <button onclick="logout()">Sair</button>
   </div>
 
-  <!-- HEADER -->
   <header class="header animate">
     <h1>ZEZE DOS DIMAS</h1>
     <p>Free Fire • Loja • Cassino • Sensibilidade</p>
   </header>
 
-  <!-- MENU -->
   <nav class="menu animate">
     <a href="index.html">Home</a>
     <a href="pages/cassino.html">Cassino FF</a>
     <a href="pages/sensibilidade.html">Sensibilidade</a>
   </nav>
 
-  <!-- HERO -->
   <section class="hero animate">
     <h2>SUBA CAPA NO FREE FIRE 🔥</h2>
     <p>Gerador de sensibilidade, loja gamer e cassino Free Fire</p>
 
     <button id="btnLogin" onclick="loginComGoogle()">ENTRAR COM GOOGLE</button>
-    <button id="btnPerfil" onclick="irParaPerfil()" style="display:none;">
-      MEU PERFIL
-    </button>
+    <button id="btnPerfil" onclick="irParaPerfil()" style="display:none;">MEU PERFIL</button>
   </section>
 
   <!-- CARDS -->
@@ -69,13 +61,11 @@
     </div>
   </section>
 
-  <!-- AVISO -->
   <section class="alert animate">
     <p>⚠️ Este site NÃO usa hack, xit ou arquivos modificados.</p>
     <p>Tudo é baseado em configuração e experiência.</p>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer animate">
     <p>© 2026 - ZEZE DOS DIMAS</p>
   </footer>
@@ -85,7 +75,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-  <!-- SCRIPTS -->
+  <!-- JS -->
   <script src="js/firebase.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/admin-check.js"></script>
