@@ -9,8 +9,10 @@ const firebaseConfig = {
   measurementId: "G-YNDH2FH765"
 };
 
-// Inicializa Firebase
-firebase.initializeApp(firebaseConfig);
+// 🔒 EVITA INICIALIZAR 2 VEZES (MUITO IMPORTANTE)
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 // Serviços
 const auth = firebase.auth();
