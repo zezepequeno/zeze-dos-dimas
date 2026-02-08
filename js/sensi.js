@@ -1,41 +1,50 @@
-function gerarSensibilidade() {
-  const marca = document.getElementById("marca").value;
-  const desempenho = document.getElementById("desempenho").value;
+// sensi.js
+// ===============================
+// Gerador de Sensibilidade Free Fire
+// ===============================
 
-  let geral, red, x2, x4, awm, olhadinha;
+function gerarSensibilidade() {
+  const marcaEl = document.getElementById("marca");
+  const desempenhoEl = document.getElementById("desempenho");
+
+  if (!marcaEl || !desempenhoEl) return;
+
+  const desempenho = desempenhoEl.value;
+
+  let sensibilidade = {
+    geral: 0,
+    red: 0,
+    x2: 0,
+    x4: 0,
+    awm: 0,
+    olhadinha: 0
+  };
 
   if (desempenho === "fraco") {
-    geral = 90;
-    red = 85;
-    x2 = 75;
-    x4 = 65;
-    awm = 50;
-    olhadinha = 60;
-  } else if (desempenho === "medio") {
-    geral = 95;
-    red = 90;
-    x2 = 80;
-    x4 = 70;
-    awm = 55;
-    olhadinha = 65;
-  } else {
-    geral = 100;
-    red = 95;
-    x2 = 85;
-    x4 = 75;
-    awm = 60;
-    olhadinha = 70;
+    sensibilidade = { geral: 90, red: 85, x2: 75, x4: 65, awm: 50, olhadinha: 60 };
+  } 
+  else if (desempenho === "medio") {
+    sensibilidade = { geral: 95, red: 90, x2: 80, x4: 70, awm: 55, olhadinha: 65 };
+  } 
+  else {
+    sensibilidade = { geral: 100, red: 95, x2: 85, x4: 75, awm: 60, olhadinha: 70 };
   }
 
-  const texto = `
-  Geral: ${geral}<br>
-  Ponto Vermelho: ${red}<br>
-  Mira 2x: ${x2}<br>
-  Mira 4x: ${x4}<br>
-  AWM: ${awm}<br>
-  Olhadinha: ${olhadinha}
+  const resultadoHTML = `
+    <h3>🎯 Sensibilidade Recomendada</h3>
+    <p>Geral: <strong>${sensibilidade.geral}</strong></p>
+    <p>Ponto Vermelho: <strong>${sensibilidade.red}</strong></p>
+    <p>Mira 2x: <strong>${sensibilidade.x2}</strong></p>
+    <p>Mira 4x: <strong>${sensibilidade.x4}</strong></p>
+    <p>AWM: <strong>${sensibilidade.awm}</strong></p>
+    <p>Olhadinha: <strong>${sensibilidade.olhadinha}</strong></p>
   `;
 
-  document.getElementById("sensibilidade").innerHTML = texto;
-  document.getElementById("resultado").style.display = "block";
+  const sensiEl = document.getElementById("sensibilidade");
+  const resultadoBox = document.getElementById("resultado");
+
+  if (!sensiEl || !resultadoBox) return;
+
+  sensiEl.innerHTML = resultadoHTML;
+  resultadoBox.style.display = "block";
 }
