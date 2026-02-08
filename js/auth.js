@@ -9,7 +9,7 @@ auth.onAuthStateChanged(async user => {
   const userBadge = document.getElementById("userBadge");
   const btnAdmin = document.getElementById("btnAdmin");
 
-  // 🔓 DESLOGADO
+  // 🔒 USUÁRIO DESLOGADO
   if (!user) {
     btnLogin && (btnLogin.style.display = "inline-block");
     btnPerfil && (btnPerfil.style.display = "none");
@@ -18,51 +18,49 @@ auth.onAuthStateChanged(async user => {
     return;
   }
 
-  // 🔎 BUSCA DADOS DO USUÁRIO
-  let snap;
   try {
+    // 🔎 BUSCA DADOS NO FIRESTORE
     const ref = db.collection("usuarios").doc(user.uid);
-    snap = await ref.get();
-  } catch (e) {
-    console.error("Erro ao buscar usuário:", e);
-    return;
-  }
+    const snap = await ref.get();
 
-  if (!snap || !snap.exists) return;
+    // ⚠️ EVITA QUEBRA SE NÃO EXISTIR DOCUMENTO
+    if (!snap.exists) {
+      console.warn("Usuário sem documento no Firestore");
+      return;
+    }
 
-  const dados = snap.data();
+    const dados = snap.data();
 
-  // 🚫 BANIMENTO
-  if (dados.banido === true) {
-    alert("Sua conta foi banida.");
-    await auth.signOut();
-    window.location.href = "/zeze-dos-dimas/index.html";
-    return;
-  }
+    // 🚫 BANIMENTO
+    if (dados.banido === true) {
+      alert("Sua conta foi banida.");
+      await auth.signOut();
+      window.location.href = "/zeze-dos-dimas/index.html";
+      return;
+    }
 
-  // ✅ LOGADO
-  btnLogin && (btnLogin.style.display = "none");
-  btnPerfil && (btnPerfil.style.display = "inline-block");
-  userTop && (userTop.style.display = "flex");
+    // 🎯 UI LOGADO
+    btnLogin && (btnLogin.style.display = "none");
+    btnPerfil && (btnPerfil.style.display = "inline-block");
+    userTop && (userTop.style.display = "flex");
 
-  userFoto && (userFoto.src = user.photoURL || "");
-  userNome && (userNome.textContent = user.displayName || "Usuário");
+    userFoto && (userFoto.src = user.photoURL || "");
+    userNome && (userNome.textContent = user.displayName || "Usuário");
 
-  // 🏷️ BADGE
-  if (userBadge) {
-    userBadge.style.display = "inline-block";
-    userBadge.textContent = dados.vip ? "VIP 🔥" : "FREE";
-  }
+    // 🏷️ BADGE VIP / FREE
+    if (userBadge) {
+      userBadge.style.display = "inline-block";
+      userBadge.textContent = dados.vip === true ? "VIP 🔥" : "FREE";
+    }
 
-  // 🧑‍⚖️ ADMIN — DUPLA VERIFICAÇÃO (EMAIL + CLAIM)
-  try {
-    const token = await user.getIdTokenResult();
-    const isAdmin =
-      user.email === ADMIN_EMAIL || token.claims.admin === true;
+    // 🧑‍⚖️ ADMIN — CENTRALIZADO AQUI (SEM DUPLICAR SCRIPT)
+    if (btnAdmin) {
+      btnAdmin.style.display =
+        user.email === ADMIN_EMAIL ? "inline-block" : "none";
+    }
 
-    btnAdmin && (btnAdmin.style.display = isAdmin ? "inline-block" : "none");
-  } catch (e) {
-    console.warn("Erro ao verificar admin:", e);
+  } catch (erro) {
+    console.error("Erro no auth.js:", erro);
     btnAdmin && (btnAdmin.style.display = "none");
   }
 });
