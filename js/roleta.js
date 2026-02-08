@@ -31,8 +31,8 @@ function girarRoleta() {
     botao.style.opacity = "0.6";
   }
 
-  resultadoEl.className = "resultado-roleta";
-  resultadoEl.innerHTML = "🎡 Girando a roleta...";
+  resultadoEl.innerHTML = "🎡 Girando...";
+  resultadoEl.className = "resultado loading";
 
   setTimeout(() => {
     const indice = Math.floor(Math.random() * premios.length);
@@ -40,12 +40,12 @@ function girarRoleta() {
 
     resultadoEl.innerHTML = `
       <div class="resultado-box ${premio.tipo}">
-        <strong>🎉 Resultado da Roleta</strong>
+        <strong>🎉 Resultado</strong>
         <p>${premio.texto}</p>
       </div>
     `;
 
-    resultadoEl.classList.add("show");
+    resultadoEl.className = "resultado show";
 
     if (botao) {
       botao.disabled = false;
