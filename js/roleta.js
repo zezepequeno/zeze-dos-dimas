@@ -1,5 +1,5 @@
 // ===============================
-// Roleta Free Fire 🎰
+// Sistema de Roleta 🎰
 // ZEZE DOS DIMAS
 // ===============================
 
@@ -20,39 +20,39 @@ function girarRoleta() {
   const resultadoEl = document.getElementById("resultadoRoleta");
   const botao = document.getElementById("btnRoleta");
 
-  if (!resultadoEl || !botao) {
-    console.warn("Elementos da roleta não encontrados");
+  if (!resultadoEl) {
     girando = false;
     return;
   }
 
-  // 🔒 Bloqueia botão enquanto gira
-  botao.disabled = true;
-  botao.innerText = "GIRANDO... 🎰";
-  botao.style.opacity = "0.6";
+  if (botao) {
+    botao.disabled = true;
+    botao.innerText = "GIRANDO... 🎡";
+    botao.style.opacity = "0.6";
+  }
 
-  // 🎯 Reset visual
-  resultadoEl.classList.remove("show", "comum", "raro", "epico", "fail");
-  resultadoEl.innerHTML = "🎰 Girando a roleta...";
+  resultadoEl.className = "resultado-roleta";
+  resultadoEl.innerHTML = "🎡 Girando a roleta...";
 
-  // ⏳ Simula giro real (UX de cassino)
   setTimeout(() => {
-    const sorteio = Math.floor(Math.random() * premios.length);
-    const premio = premios[sorteio];
+    const indice = Math.floor(Math.random() * premios.length);
+    const premio = premios[indice];
 
     resultadoEl.innerHTML = `
       <div class="resultado-box ${premio.tipo}">
-        🎉 <strong>${premio.texto}</strong>
+        <strong>🎉 Resultado da Roleta</strong>
+        <p>${premio.texto}</p>
       </div>
     `;
 
-    resultadoEl.classList.add("show", premio.tipo);
+    resultadoEl.classList.add("show");
 
-    // 🔓 Libera botão
-    botao.disabled = false;
-    botao.innerText = "GIRAR NOVAMENTE 🎰";
-    botao.style.opacity = "1";
+    if (botao) {
+      botao.disabled = false;
+      botao.innerText = "GIRAR NOVAMENTE 🎰";
+      botao.style.opacity = "1";
+    }
+
     girando = false;
-
-  }, 2000);
+  }, 1600);
 }
