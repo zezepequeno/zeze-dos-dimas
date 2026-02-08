@@ -37,74 +37,75 @@ auth.onAuthStateChanged(async user => {
 // LOGIN GOOGLE + FIRESTORE AUTO
 // ===============================
 function loginComGoogle() {
-  auth.signInWithPopup(provider).then(async result => {
-    const user = result.user;
-    const uid = user.uid;
+  auth.signInWithPopup(provider)
+    .then(async result => {
+      const user = result.user;
+      const uid = user.uid;
 
-    const userRef = db.collection("usuarios").doc(uid);
-    const snap = await userRef.get();
+      const userRef = db.collection("usuarios").doc(uid);
+      const snap = await userRef.get();
 
-    if (!snap.exists) {
-      await userRef.set({
-        uid,
-        provider: "google",
-
-        dadosPrincipais: {
+      if (!snap.exists) {
+        await userRef.set({
           uid,
+          provider: "google",
+
+          dadosPrincipais: {
+            uid,
+            nome: user.displayName || "",
+            email: user.email || "",
+            foto: user.photoURL || "",
+            telefone: user.phoneNumber || "",
+            emailVerificado: user.emailVerified,
+            criadoEmAuth: user.metadata.creationTime,
+            ultimoLoginAuth: user.metadata.lastSignInTime
+          },
+
           nome: user.displayName || "",
           email: user.email || "",
           foto: user.photoURL || "",
-          telefone: user.phoneNumber || "",
-          emailVerificado: user.emailVerified,
-          criadoEmAuth: user.metadata.creationTime,
-          ultimoLoginAuth: user.metadata.lastSignInTime
-        },
 
-        nome: user.displayName || "",
-        email: user.email || "",
-        foto: user.photoURL || "",
+          vip: false,
+          nivel: "free",
+          banido: false,
+          admin: user.email === ADMIN_EMAIL,
 
-        vip: false,
-        nivel: "free",
-        banido: false,
-        admin: user.email === ADMIN_EMAIL,
+          acessos: 1,
+          compras: 0,
+          moedas: 0,
 
-        acessos: 1,
-        compras: 0,
-        moedas: 0,
+          criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
+          ultimoAcesso: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      } else {
+        await userRef.update({
+          ultimoAcesso: firebase.firestore.FieldValue.serverTimestamp(),
+          acessos: firebase.firestore.FieldValue.increment(1),
+          "dadosPrincipais.ultimoLoginAuth": user.metadata.lastSignInTime
+        });
+      }
 
-        criadoEm: firebase.firestore.FieldValue.serverTimestamp(),
-        ultimoAcesso: firebase.firestore.FieldValue.serverTimestamp()
-      });
-    } else {
-      await userRef.update({
-        ultimoAcesso: firebase.firestore.FieldValue.serverTimestamp(),
-        acessos: firebase.firestore.FieldValue.increment(1),
-        "dadosPrincipais.ultimoLoginAuth": user.metadata.lastSignInTime
-      });
-    }
-
-    window.location.href = "/zeze/pages/perfil.html";
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Erro ao fazer login");
-  });
+      window.location.href = "pages/perfil.html";
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Erro ao fazer login");
+    });
 }
 
 // ===============================
 // NAVEGAÇÃO
 // ===============================
 function irParaPerfil() {
-  window.location.href = "/zeze/pages/perfil.html";
+  window.location.href = "pages/perfil.html";
 }
 
 function irParaAdmin() {
-  window.location.href = "/zeze/pages/admin.html";
+  window.location.href = "pages/admin.html";
 }
 
 function logout() {
   auth.signOut().then(() => {
-    window.location.href = "/zeze/index.html";
+    window.location.href = "index.html";
   });
 }
