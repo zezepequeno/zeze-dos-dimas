@@ -1,9 +1,113 @@
-/* ===== ROLETA VISUAL ===== */
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Orbitron', sans-serif;
+}
+
+body {
+  background: linear-gradient(180deg, #000814, #001d3d);
+  color: #fff;
+  text-align: center;
+}
+
+/* ===== ANIMAÇÕES ===== */
+.animate {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== HEADER ===== */
+.header {
+  padding: 30px 10px;
+  background: #000;
+  border-bottom: 2px solid #00bfff;
+}
+
+.header h1 {
+  color: #00bfff;
+  font-size: 28px;
+}
+
+/* ===== MENU ===== */
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 15px;
+  background: #001d3d;
+}
+
+.menu a {
+  color: #00bfff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ===== HERO ===== */
+.hero {
+  padding: 40px 20px;
+}
+
+.hero h2 {
+  color: #00bfff;
+  margin-bottom: 10px;
+}
+
+.hero button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: #00bfff;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ===== CARDS ===== */
+.cards {
+  display: grid;
+  gap: 20px;
+  padding: 30px;
+}
+
+.card {
+  background: #000;
+  border: 1px solid #00bfff33;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+/* ===== ALERTA ===== */
+.alert {
+  background: #001d3d;
+  padding: 20px;
+  font-size: 14px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 15px;
+  background: #000;
+  margin-top: 20px;
+}
+
+/* ===================== */
+/* ===== ROLETA ===== */
 .roleta-container {
   position: relative;
   width: 260px;
   height: 260px;
-  margin: 20px auto;
+  margin: 30px auto;
 }
 
 .roleta {
@@ -13,7 +117,7 @@
   border: 6px solid #00bfff;
   display: flex;
   flex-wrap: wrap;
-  transition: transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
   background: #000814;
 }
 
@@ -32,8 +136,6 @@
   top: -14px;
   left: 50%;
   transform: translateX(-50%);
-  width: 0;
-  height: 0;
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
   border-bottom: 20px solid #00bfff;
