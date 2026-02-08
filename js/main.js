@@ -1,3 +1,17 @@
+// ===== ANIMAÇÕES AO ROLAR A PÁGINA =====
+const animatedElements = document.querySelectorAll(".animate");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+    }
+  });
+}, { threshold: 0.2 });
+
+animatedElements.forEach(el => observer.observe(el));
+
+// ===== ROLETAS E BAÚS =====
 function girarRoleta() {
   const premios = [
     "Cupom 10% OFF",
@@ -7,11 +21,15 @@ function girarRoleta() {
     "Nada 😅"
   ];
 
-  const sorteio = Math.floor(Math.random() * premios.length);
-  const premio = premios[sorteio];
+  const resultado = document.getElementById("resultadoRoleta");
+  resultado.innerHTML = "🎰 Girando...";
+  resultado.classList.add("loading");
 
-  document.getElementById("resultadoRoleta").innerHTML =
-    "🎉 Você ganhou: <strong>" + premio + "</strong>";
+  setTimeout(() => {
+    const sorteio = Math.floor(Math.random() * premios.length);
+    resultado.classList.remove("loading");
+    resultado.innerHTML = "🎉 Você ganhou: <strong>" + premios[sorteio] + "</strong>";
+  }, 1500);
 }
 
 function abrirBau() {
@@ -22,9 +40,13 @@ function abrirBau() {
     "Baú Vazio 😭"
   ];
 
-  const sorteio = Math.floor(Math.random() * premiosBau.length);
-  const premio = premiosBau[sorteio];
+  const resultado = document.getElementById("resultadoBau");
+  resultado.innerHTML = "🔓 Abrindo baú...";
+  resultado.classList.add("loading");
 
-  document.getElementById("resultadoBau").innerHTML =
-    "🎁 Prêmio do baú: <strong>" + premio + "</strong>";
+  setTimeout(() => {
+    const sorteio = Math.floor(Math.random() * premiosBau.length);
+    resultado.classList.remove("loading");
+    resultado.innerHTML = "🎁 Prêmio do baú: <strong>" + premiosBau[sorteio] + "</strong>";
+  }, 1500);
 }
