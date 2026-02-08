@@ -5,36 +5,54 @@
   <title>Painel Admin | ZEZE DOS DIMAS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="stylesheet" href="/zeze-dos-dimas/css/style.css">
+
   <style>
-    body {
-      background: #0b0b0b;
-      color: #fff;
-      font-family: Orbitron, sans-serif;
-      padding: 20px;
+    .admin-container {
+      max-width: 900px;
+      margin: auto;
     }
 
-    h1 {
+    .admin-header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+    }
+
+    .admin-header p {
+      opacity: 0.8;
+      margin-top: 5px;
     }
 
     .user-card {
-      background: #111;
-      border-radius: 10px;
-      padding: 15px;
+      background: rgba(0,0,0,0.8);
+      border-radius: 15px;
+      padding: 20px;
       margin-bottom: 15px;
+      border: 1px solid rgba(0,191,255,0.3);
+      box-shadow: 0 0 15px rgba(0,191,255,0.15);
+    }
+
+    .user-card b {
+      color: #00bfff;
+      font-size: 16px;
+    }
+
+    .actions {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .actions button {
-      margin: 5px 5px 0 0;
-      padding: 6px 10px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+      padding: 8px 14px;
+      border-radius: 10px;
       font-weight: bold;
+      cursor: pointer;
+      border: none;
     }
 
-    .ban { background: red; color: #fff; }
+    .ban { background: #ff3b3b; color: #fff; }
     .vip { background: gold; color: #000; }
     .coin { background: #00ff99; color: #000; }
   </style>
@@ -42,10 +60,16 @@
 
 <body>
 
-<h1>🛠️ PAINEL ADMIN — NÍVEL X</h1>
-<p id="adminEmail"></p>
+<div class="admin-container animate">
 
-<div id="usersList"></div>
+  <div class="admin-header">
+    <h1>🛠️ PAINEL ADMIN — NÍVEL X</h1>
+    <p id="adminEmail"></p>
+  </div>
+
+  <div id="usersList"></div>
+
+</div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -81,7 +105,9 @@ async function carregarUsuarios() {
     div.innerHTML = `
       <b>${u.nome || "Sem nome"}</b><br>
       ${u.email}<br>
-      VIP: ${u.vip} | BANIDO: ${u.banido} | MOEDAS: ${u.moedas || 0}
+      VIP: ${u.vip ? "SIM" : "NÃO"} |
+      BANIDO: ${u.banido ? "SIM" : "NÃO"} |
+      MOEDAS: ${u.moedas || 0}
 
       <div class="actions">
         <button class="ban" onclick="banir('${doc.id}', ${!u.banido})">
@@ -100,8 +126,6 @@ async function carregarUsuarios() {
     list.appendChild(div);
   });
 }
-
-// ===== AÇÕES =====
 
 async function banir(uid, status) {
   await db.collection("usuarios").doc(uid).update({ banido: status });
@@ -123,7 +147,6 @@ async function moedas(uid, valor) {
   carregarUsuarios();
 }
 
-// ===== LOGS =====
 function registrarLog(uid, acao) {
   db.collection("admin_logs").add({
     uid,
