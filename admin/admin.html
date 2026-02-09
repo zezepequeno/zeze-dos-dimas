@@ -1,81 +1,25 @@
-<script>
-const ADMIN_EMAIL = "virtualinvest@gmail.com";
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
 
-auth.onAuthStateChanged(async user => {
-  if (!user || user.email !== ADMIN_EMAIL) {
-    alert("Acesso negado.");
-    window.location.href = "/zeze-dos-dimas/index.html";
-    return;
-  }
+<header class="header">
+  <h1>PAINEL ADMIN</h1>
+  <p id="adminEmail"></p>
+</header>
 
-  document.getElementById("adminEmail").innerText =
-    "Admin logado: " + user.email;
+<section class="cards" id="usersList"></section>
 
-  carregarUsuarios();
-});
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-async function carregarUsuarios() {
-  const list = document.getElementById("usersList");
-  list.innerHTML = "";
+<script src="../js/firebase.js"></script>
+<script src="../js/admin.js"></script>
 
-  const snap = await db.collection("usuarios").get();
-
-  snap.forEach(doc => {
-    const u = doc.data();
-
-    const div = document.createElement("div");
-    div.className = "user-card";
-
-    div.innerHTML = `
-      <b>${u.nome || "Sem nome"}</b><br>
-      ${u.email || "Sem email"}<br>
-      VIP: ${u.vip ? "SIM" : "NÃO"} |
-      BANIDO: ${u.banido ? "SIM" : "NÃO"} |
-      MOEDAS: ${u.moedas || 0}
-
-      <div class="actions">
-        <button class="ban" onclick="banir('${doc.id}', ${!u.banido})">
-          ${u.banido ? "DESBANIR" : "BANIR"}
-        </button>
-
-        <button class="vip" onclick="vip('${doc.id}', ${!u.vip})">
-          ${u.vip ? "REMOVER VIP" : "DAR VIP"}
-        </button>
-
-        <button class="coin" onclick="moedas('${doc.id}', 100)">+100 💰</button>
-        <button class="coin" onclick="moedas('${doc.id}', -100)">-100 💰</button>
-      </div>
-    `;
-
-    list.appendChild(div);
-  });
-}
-
-async function banir(uid, status) {
-  await db.collection("usuarios").doc(uid).update({ banido: status });
-  registrarLog(uid, status ? "BANIDO" : "DESBANIDO");
-  carregarUsuarios();
-}
-
-async function vip(uid, status) {
-  await db.collection("usuarios").doc(uid).update({ vip: status });
-  registrarLog(uid, status ? "VIP ATIVADO" : "VIP REMOVIDO");
-  carregarUsuarios();
-}
-
-async function moedas(uid, valor) {
-  await db.collection("usuarios").doc(uid).update({
-    moedas: firebase.firestore.FieldValue.increment(valor)
-  });
-  registrarLog(uid, `${valor > 0 ? "+" : ""}${valor} MOEDAS`);
-  carregarUsuarios();
-}
-
-function registrarLog(uid, acao) {
-  db.collection("admin_logs").add({
-    uid,
-    acao,
-    data: firebase.firestore.FieldValue.serverTimestamp()
-  });
-}
-</script>
+</body>
+</html>
