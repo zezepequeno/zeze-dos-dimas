@@ -9,6 +9,7 @@ auth.onAuthStateChanged(async user => {
   const userBadge = document.getElementById("userBadge");
   const btnAdmin = document.getElementById("btnAdmin");
 
+  // 🔒 DESLOGADO
   if (!user) {
     btnLogin && (btnLogin.style.display = "inline-block");
     btnPerfil && (btnPerfil.style.display = "none");
@@ -21,10 +22,14 @@ auth.onAuthStateChanged(async user => {
     const ref = db.collection("usuarios").doc(user.uid);
     const snap = await ref.get();
 
-    if (!snap.exists) return;
+    if (!snap.exists) {
+      console.warn("Usuário sem documento no Firestore");
+      return;
+    }
 
     const dados = snap.data();
 
+    // 🚫 BANIDO
     if (dados.banido === true) {
       alert("Sua conta foi banida.");
       await auth.signOut();
@@ -32,6 +37,7 @@ auth.onAuthStateChanged(async user => {
       return;
     }
 
+    // 🎯 UI LOGADO
     btnLogin && (btnLogin.style.display = "none");
     btnPerfil && (btnPerfil.style.display = "inline-block");
     userTop && (userTop.style.display = "flex");
@@ -39,21 +45,24 @@ auth.onAuthStateChanged(async user => {
     userFoto && (userFoto.src = user.photoURL || "");
     userNome && (userNome.textContent = user.displayName || "Usuário");
 
+    // 🏷️ BADGE
     if (userBadge) {
       userBadge.style.display = "inline-block";
       userBadge.textContent = dados.vip ? "VIP 🔥" : "FREE";
       userBadge.className = "badge " + (dados.vip ? "vip" : "free");
     }
 
+    // 👑 ADMIN (SÓ VOCÊ)
     if (btnAdmin) {
       btnAdmin.style.display =
         user.email === ADMIN_EMAIL ? "inline-block" : "none";
     }
 
-    // deixa disponível globalmente
+    // 🌐 DISPONÍVEL GLOBAL
     window.USER_DATA = dados;
 
   } catch (erro) {
     console.error("Erro no auth.js:", erro);
+    btnAdmin && (btnAdmin.style.display = "none");
   }
 });
