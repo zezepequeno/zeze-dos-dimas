@@ -1,5 +1,10 @@
+// ===============================
+// Painel Admin - ZEZE DOS DIMAS
+// ===============================
+
 const ADMIN_EMAIL = "virtualinvest@gmail.com";
 
+// 🔐 BLOQUEIA ACESSO DIRETO
 auth.onAuthStateChanged(async user => {
   if (!user || user.email !== ADMIN_EMAIL) {
     alert("Acesso negado.");
@@ -7,49 +12,60 @@ auth.onAuthStateChanged(async user => {
     return;
   }
 
-  document.getElementById("adminEmail").textContent =
-    "Admin logado: " + user.email;
+  // Mostra email do admin
+  const adminEmail = document.getElementById("adminEmail");
+  adminEmail && (adminEmail.textContent = user.email);
 
   carregarUsuarios();
 });
 
+// 📋 LISTA DE USUÁRIOS
 async function carregarUsuarios() {
-  const list = document.getElementById("usersList");
-  list.innerHTML = "";
+  const usersList = document.getElementById("usersList");
+  if (!usersList) return;
 
-  const snap = await db.collection("usuarios").get();
+  usersList.innerHTML = "";
 
-  snap.forEach(doc => {
+  const snapshot = await db.collection("usuarios").get();
+
+  snapshot.forEach(doc => {
     const u = doc.data();
 
-    const div = document.createElement("div");
-    div.className = "card";
+    const card = document.createElement("div");
+    card.className = "card animate";
 
-    div.innerHTML = `
-      <h3>${u.nome || "Sem nome"}</h3>
-      <p>${u.email}</p>
-      <p>VIP: ${u.vip ? "SIM" : "NÃO"}</p>
+    card.innerHTML = `
+      <h3>${u.nome || "Usuário"}</h3>
+      <p>Email: ${u.email}</p>
+      <p>Status: ${u.vip ? "VIP 🔥" : "FREE"}</p>
       <p>Banido: ${u.banido ? "SIM" : "NÃO"}</p>
 
-      <button onclick="vip('${doc.id}', ${!u.vip})">
+      <button onclick="toggleVIP('${doc.id}', ${u.vip})">
         ${u.vip ? "REMOVER VIP" : "DAR VIP"}
       </button>
 
-      <button onclick="banir('${doc.id}', ${!u.banido})">
+      <button onclick="toggleBan('${doc.id}', ${u.banido})"
+        style="background:#ff3b3b;color:#fff;">
         ${u.banido ? "DESBANIR" : "BANIR"}
       </button>
     `;
 
-    list.appendChild(div);
+    usersList.appendChild(card);
   });
 }
 
-function vip(uid, status) {
-  db.collection("usuarios").doc(uid).update({ vip: status });
+// ⭐ VIP
+async function toggleVIP(uid, statusAtual) {
+  await db.collection("usuarios").doc(uid).update({
+    vip: !statusAtual
+  });
   carregarUsuarios();
 }
 
-function banir(uid, status) {
-  db.collection("usuarios").doc(uid).update({ banido: status });
+// 🚫 BAN
+async function toggleBan(uid, statusAtual) {
+  await db.collection("usuarios").doc(uid).update({
+    banido: !statusAtual
+  });
   carregarUsuarios();
 }
