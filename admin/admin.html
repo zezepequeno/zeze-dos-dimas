@@ -3,22 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Painel Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-<header class="header">
+<header class="header animate">
   <h1>PAINEL ADMIN</h1>
   <p id="adminEmail"></p>
 </header>
 
 <section class="cards" id="usersList"></section>
 
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <script src="../js/firebase.js"></script>
+<script src="../js/auth.js"></script>
 <script src="../js/admin.js"></script>
 
 </body>
