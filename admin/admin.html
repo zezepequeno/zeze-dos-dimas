@@ -22,12 +22,13 @@ async function carregarUsuarios() {
 
   snap.forEach(doc => {
     const u = doc.data();
+
     const div = document.createElement("div");
     div.className = "user-card";
 
     div.innerHTML = `
       <b>${u.nome || "Sem nome"}</b><br>
-      ${u.email}<br>
+      ${u.email || "Sem email"}<br>
       VIP: ${u.vip ? "SIM" : "NÃO"} |
       BANIDO: ${u.banido ? "SIM" : "NÃO"} |
       MOEDAS: ${u.moedas || 0}
